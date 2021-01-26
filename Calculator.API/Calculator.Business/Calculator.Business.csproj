@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Bootstrap" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Calculator.Dto\Calculator.Dto.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation.AspNetCore" Version="9.4.0" />
+    </ItemGroup>
+
+</Project>
