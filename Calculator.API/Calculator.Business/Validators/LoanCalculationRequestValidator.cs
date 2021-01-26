@@ -16,8 +16,8 @@ namespace Calculator.Business.Validators
     {
       RuleFor(x => x.Amount).GreaterThan(0);
       RuleFor(x => x.Period).GreaterThan(0);
-      RuleFor(x => x.Type).IsInEnum();
-      RuleFor(x => x.PeriodType).IsInEnum();
+      RuleFor(x => x.Type).IsInEnum().WithMessage("Invalid loan type");
+      RuleFor(x => x.PeriodType).IsInEnum().WithMessage("Invalid period type");
     }
   }
 }
