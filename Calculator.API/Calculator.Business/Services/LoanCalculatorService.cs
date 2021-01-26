@@ -27,7 +27,10 @@ namespace Calculator.Business.Services
     {
       this.logger.Debug("Calculating the payback plan for params: {@Params}", request);
       await this.loanCalculationValidator.ValidateAndThrowAsync(request);
-      return null;
+      return new LoanCalculationResponse
+      {
+        
+      };
     }
   }
 }

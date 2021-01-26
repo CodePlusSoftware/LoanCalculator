@@ -29,6 +29,7 @@ namespace Calculator.API.Bootstrap
     {
       ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en");
       serviceCollection.AddValidatorsFromAssembly(typeof(LoanCalculatorService).Assembly);
+      
       return serviceCollection;
     }
   }

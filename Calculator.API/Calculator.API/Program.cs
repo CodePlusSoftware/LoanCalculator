@@ -18,12 +18,7 @@ namespace Calculator.API
         .AddJsonFile("appsettings.json")
         .AddEnvironmentVariables()
         .Build();
-      
-      Log.Logger = new LoggerConfiguration()
-        .Enrich.FromLogContext()
-        .ReadFrom.Configuration(configuration)
-        .CreateLogger();
-      
+
       try
       {
         Log.Information("Starting up");
@@ -46,9 +41,8 @@ namespace Calculator.API
           logging.ClearProviders();
           logging.AddSerilog();
         })
-        .ConfigureWebHostDefaults(webBuilder => {           
-          webBuilder.UseKestrel();
-          webBuilder.UseStartup<Startup>();
-          webBuilder.UseIISIntegration(); });
+        .UseSerilog((host, logger) => { logger.ReadFrom.Configuration(configuration); })
+        .ConfigureWebHostDefaults(webBuilder => {
+          webBuilder.UseStartup<Startup>(); });
   }
 }
