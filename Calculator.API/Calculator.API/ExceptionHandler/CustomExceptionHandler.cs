@@ -48,7 +48,7 @@ namespace Calculator.API.ExceptionHandler
         httpContext.Response.ContentType = "application/problem+json";
 
         var problem = GetProblemDetails(ex, includeDetails);
-
+        httpContext.Response.StatusCode = problem.Status ?? StatusCodes.Status500InternalServerError;
         var traceId = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
         if (traceId != null)
         {

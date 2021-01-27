@@ -3,21 +3,26 @@ import {CommonModule} from '@angular/common';
 
 import {CalculatorRoutingModule} from './calculator-routing.module';
 import {PrimeNgModule} from "../prime-ng/prime-ng.module";
-import {HouseCreditCalculatorComponent} from './house-loan-calculator/house-credit-calculator.component';
-import {HouseCreditCalculatorFormComponent} from './house-loan-calculator/house-credit-calculator-form/house-credit-calculator-form.component';
+import {HouseLoanCalculatorComponent} from './house-loan-calculator/house-loan-calculator.component';
+import {HouseLoanCalculatorFormComponent} from './house-loan-calculator/house-loan-calculator-form/house-loan-calculator-form.component';
 import {CoreModule} from "../core/core.module";
-import { HouseCreditCalculationResultsListComponent } from './house-loan-calculator/house-credit-calculation-results-list/house-credit-calculation-results-list.component';
+import { HouseLoanAmortizationScheduleComponent } from './house-loan-calculator/house-loan-amortization-schedule/house-loan-amortization-schedule.component';
+import { HouseLoanCalculationOverviewComponent } from './house-loan-calculator/house-loan-calculation-overview/house-loan-calculation-overview.component';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
-  declarations: [HouseCreditCalculatorComponent, HouseCreditCalculatorFormComponent, HouseCreditCalculationResultsListComponent],
+  declarations: [HouseLoanCalculatorComponent, HouseLoanCalculatorFormComponent, HouseLoanAmortizationScheduleComponent, HouseLoanCalculationOverviewComponent],
   imports: [
     CommonModule,
     CalculatorRoutingModule,
     CoreModule,
-    PrimeNgModule
+    PrimeNgModule,
+    BrowserAnimationsModule,
+    NgxChartsModule
   ],
-  exports: [HouseCreditCalculatorComponent]
+  exports: [HouseLoanCalculatorComponent]
 })
 export class CalculatorModule {
 }

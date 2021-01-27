@@ -1,22 +1,19 @@
+<div class="section-title">Amortization Schedule</div>
+
 <p-table [value]="installments"
-         [rows]="60"
+         [rows]="rowsPerPageOptions[0]"
          [columns]="columns"
+         [rowsPerPageOptions]="rowsPerPageOptions"
          [paginator]="true"
          styleClass="p-datatable-striped p-datatable-gridlines"
          [showCurrentPageReport]="true"
          [responsive]="true"
-         #dt
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} installments"
 >
-  <ng-template pTemplate="caption">
-    <div class="p-d-flex">
-      <button type="button" pButton pRipple icon="pi pi-file-o" (click)="dt.exportCSV()" class="p-mr-2" pTooltip="CSV Export" tooltipPosition="right"></button>
-      <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF export" tooltipPosition="right"></button>
-    </div>
-  </ng-template>
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th *ngFor="let col of columns" [pSortableColumn]="col.field">{{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">{{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
     </tr>
   </ng-template>

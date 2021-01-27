@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HouseCreditCalculatorComponent } from './house-credit-calculator.component';
+import { HouseLoanCalculatorComponent } from './house-loan-calculator.component';
 
 describe('HouseLoanCalculatorComponent', () => {
-  let component: HouseCreditCalculatorComponent;
-  let fixture: ComponentFixture<HouseCreditCalculatorComponent>;
+  let component: HouseLoanCalculatorComponent;
+  let fixture: ComponentFixture<HouseLoanCalculatorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HouseCreditCalculatorComponent ]
+      declarations: [ HouseLoanCalculatorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HouseCreditCalculatorComponent);
+    fixture = TestBed.createComponent(HouseLoanCalculatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

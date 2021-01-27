@@ -1,9 +1,9 @@
 export class CalculateCreditFormModel {
-  value: number;
+  loanAmount: number;
   period: number;
 
   constructor(value: number, period: number) {
-    this.value = value;
+    this.loanAmount = value;
     this.period = period;
   }
 }

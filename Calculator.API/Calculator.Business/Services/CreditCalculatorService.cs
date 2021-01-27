@@ -6,6 +6,7 @@
 // // <summary>LoanCalculatorService.cs</summary>
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Calculator.Dto.Dto;
 using Calculator.Dto.Request;
@@ -53,6 +54,9 @@ namespace Calculator.Business.Services
         response.Installments.Add(installment);
       }
 
+      response.TotalInterest = response.Installments.Sum(x => x.Interest);
+      response.TotalPrincipal = response.Installments.Sum(x => x.Principal);
+      response.TotalPayment = response.Installments.Sum(x => x.Payment);
       return response;
     }
   }

@@ -3,10 +3,10 @@ import {CalculateCreditFormModel} from "../../models/calculate-credit-form-model
 
 @Component({
   selector: 'app-house-credit-calculator-form',
-  templateUrl: './house-credit-calculator-form.component.html',
-  styleUrls: ['./house-credit-calculator-form.component.scss']
+  templateUrl: './house-loan-calculator-form.component.html',
+  styleUrls: ['./house-loan-calculator-form.component.scss']
 })
-export class HouseCreditCalculatorFormComponent implements OnInit {
+export class HouseLoanCalculatorFormComponent implements OnInit {
   public val: number = 200000;
   public period: number = 25;
 

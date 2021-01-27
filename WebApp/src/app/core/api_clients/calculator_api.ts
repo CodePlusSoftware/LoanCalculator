@@ -26,10 +26,10 @@ export class CalculatorApiClient {
     }
 
     /**
-     * @param value (optional) 
-     * @param period (optional) 
-     * @param type (optional) 
-     * @param periodType (optional) 
+     * @param value (optional)
+     * @param period (optional)
+     * @param type (optional)
+     * @param periodType (optional)
      * @return Success
      */
     creditCalculator(value: number | undefined, period: number | undefined, type: ECreditType | undefined, periodType: EPeriodType | undefined): Observable<CreditCalculationResult> {
@@ -150,7 +150,7 @@ export class InstallmentDto implements IInstallmentDto {
         data["interest"] = this.interest;
         data["installmentDate"] = this.installmentDate ? this.installmentDate.toISOString() : <any>undefined;
         data["payment"] = this.payment;
-        return data; 
+        return data;
     }
 }
 
@@ -162,9 +162,9 @@ export interface IInstallmentDto {
 }
 
 export class CreditCalculationResult implements ICreditCalculationResult {
-    totalCapital?: number;
+    totalPrincipal?: number;
     totalInterest?: number;
-    totalInstallment?: number;
+    totalPayment?: number;
     readonly installments?: InstallmentDto[] | undefined;
 
     constructor(data?: ICreditCalculationResult) {
@@ -178,9 +178,9 @@ export class CreditCalculationResult implements ICreditCalculationResult {
 
     init(_data?: any) {
         if (_data) {
-            this.totalCapital = _data["totalCapital"];
+            this.totalPrincipal = _data["totalPrincipal"];
             this.totalInterest = _data["totalInterest"];
-            this.totalInstallment = _data["totalInstallment"];
+            this.totalPayment = _data["totalPayment"];
             if (Array.isArray(_data["installments"])) {
                 (<any>this).installments = [] as any;
                 for (let item of _data["installments"])
@@ -198,22 +198,22 @@ export class CreditCalculationResult implements ICreditCalculationResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["totalCapital"] = this.totalCapital;
+        data["totalPrincipal"] = this.totalPrincipal;
         data["totalInterest"] = this.totalInterest;
-        data["totalInstallment"] = this.totalInstallment;
+        data["totalPayment"] = this.totalPayment;
         if (Array.isArray(this.installments)) {
             data["installments"] = [];
             for (let item of this.installments)
                 data["installments"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
 export interface ICreditCalculationResult {
-    totalCapital?: number;
+    totalPrincipal?: number;
     totalInterest?: number;
-    totalInstallment?: number;
+    totalPayment?: number;
     installments?: InstallmentDto[] | undefined;
 }
 

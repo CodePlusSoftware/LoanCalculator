@@ -18,9 +18,9 @@ namespace Calculator.Dto.Response
       this.Installments = new List<InstallmentDto>();
     }
 
-    public decimal TotalCapital { get; set; }
+    public decimal TotalPrincipal { get; set; }
     public decimal TotalInterest { get; set; }
-    public decimal TotalInstallment { get; set; }
+    public decimal TotalPayment { get; set; }
     public List<InstallmentDto> Installments { get; }
   }
 }

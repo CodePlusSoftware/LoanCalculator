@@ -3,13 +3,13 @@ import {InstallmentDto} from "../../../core/api_clients/calculator_api";
 
 @Component({
   selector: 'app-house-credit-calculation-results-list',
-  templateUrl: './house-credit-calculation-results-list.component.html',
-  styleUrls: ['./house-credit-calculation-results-list.component.scss']
+  templateUrl: './house-loan-amortization-schedule.component.html',
+  styleUrls: ['./house-loan-amortization-schedule.component.scss']
 })
-export class HouseCreditCalculationResultsListComponent implements OnInit {
+export class HouseLoanAmortizationScheduleComponent implements OnInit {
 
   public columns: any[];
-  public exportColumns: any[];
+  public rowsPerPageOptions: number[] = [60, 120, 180];
 
   @Input()
   public installments: InstallmentDto[]
@@ -27,12 +27,5 @@ export class HouseCreditCalculationResultsListComponent implements OnInit {
       { field: 'interest', header: 'Interest' },
       { field: 'payment', header: 'Payment' }
     ];
-    this.exportColumns = this.columns.map(col => ({title: col.header, dataKey: col.field}));
-  }
-
-  exportPdf() {
-    const doc = new jsPDF()
-    autoTable(doc, { html: '#my-table' })
-    doc.save('table.pdf')
   }
 }
