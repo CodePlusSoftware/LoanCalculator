@@ -21,14 +21,14 @@ namespace Calculator.API.Bootstrap
 
     public static IServiceCollection RegisterServices(this IServiceCollection serviceCollection)
     {
-      serviceCollection.AddScoped<ILoanCalculatorService, LoanCalculatorService>();
+      serviceCollection.AddScoped<ICreditCalculatorService, CreditCalculatorService>();
       return serviceCollection;
     }
     
     public static IServiceCollection RegisterValidators(this IServiceCollection serviceCollection)
     {
       ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en");
-      serviceCollection.AddValidatorsFromAssembly(typeof(LoanCalculatorService).Assembly);
+      serviceCollection.AddValidatorsFromAssembly(typeof(CreditCalculatorService).Assembly);
       
       return serviceCollection;
     }

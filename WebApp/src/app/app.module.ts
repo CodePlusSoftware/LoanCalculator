@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {CalculatorModule} from "./calculator/calculator.module";
+import {CoreModule} from "./core/core.module";
 import {PrimeNgModule} from "./prime-ng/prime-ng.module";
-import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -13,8 +14,9 @@ import {FormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PrimeNgModule,
-    FormsModule
+    CalculatorModule,
+    CoreModule,
+    PrimeNgModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,14 +11,14 @@ using Calculator.Dto.Dto;
 
 namespace Calculator.Dto.Response
 {
-  public class LoanCalculationResponse
+  public class CreditCalculationResult
   {
-    public LoanCalculationResponse()
+    public CreditCalculationResult()
     {
       this.Installments = new List<InstallmentDto>();
     }
 
-    public decimal TotalCapital => this.TotalInterest + this.TotalInstallment;
+    public decimal TotalCapital { get; set; }
     public decimal TotalInterest { get; set; }
     public decimal TotalInstallment { get; set; }
     public List<InstallmentDto> Installments { get; }

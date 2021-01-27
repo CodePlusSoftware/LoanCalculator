@@ -11,8 +11,8 @@ using Calculator.Dto.Response;
 
 namespace Calculator.Business.Services
 {
-  public interface ILoanCalculatorService
+  public interface ICreditCalculatorService
   {
-    Task<LoanCalculationResponse> Calculate(LoanCalculationRequest request);
+    Task<CreditCalculationResult> CalculateAsync(CalculateCreditRequest request);
   }
 }

@@ -5,6 +5,7 @@
 // // <date>26-01-2021</date>
 // // <summary>LoanCalculatorService.cs</summary>
 
+using System;
 using System.Threading.Tasks;
 using Calculator.Dto.Dto;
 using Calculator.Dto.Request;
@@ -14,30 +15,30 @@ using Serilog;
 
 namespace Calculator.Business.Services
 {
-  public class LoanCalculatorService : ILoanCalculatorService
+  public class CreditCalculatorService : ICreditCalculatorService
   {
-    private readonly IValidator<LoanCalculationRequest> loanCalculationValidator;
+    private readonly IValidator<CalculateCreditRequest> loanCalculationValidator;
     private readonly ILogger logger;
 
-    public LoanCalculatorService(IValidator<LoanCalculationRequest> loanCalculationValidator, ILogger logger)
+    public CreditCalculatorService(IValidator<CalculateCreditRequest> loanCalculationValidator, ILogger logger)
     {
       this.loanCalculationValidator = loanCalculationValidator;
       this.logger = logger;
     }
-    public async Task<LoanCalculationResponse> Calculate(LoanCalculationRequest request)
+    public async Task<CreditCalculationResult> CalculateAsync(CalculateCreditRequest request)
     {
-        this.logger.Debug("Calculating the payback plan for params: {@Params}", request);
+      this.logger.Debug("Calculating the payback plan for params: {@Params}", request);
       await this.loanCalculationValidator.ValidateAndThrowAsync(request);
 
       const decimal interestRate = 3.5m;
 
       var months = request.Period * 12;
 
-      var response = new LoanCalculationResponse();
-      var capitalInstallment = request.Amount / months;
+      var response = new CreditCalculationResult();
+      var capitalInstallment = request.Value / months;
 
-      var totalAmount = request.Amount;
-      var fixedAmount = request.Amount;
+      var totalAmount = request.Value;
+      var fixedAmount = request.Value;
       
       //https://enerad.pl/finanse/kredyt-hipoteczny/jak-obliczyc-raty-i-odsetki-od-kredytu-hipotecznego/
       for (int i = 0; i < months; i++)
@@ -45,8 +46,9 @@ namespace Calculator.Business.Services
         var interest = (((totalAmount - i * capitalInstallment)/100 * interestRate)) / 12;
         var installment = new InstallmentDto
         {
-          Capital = capitalInstallment,
-          Interest = interest
+          Principal = capitalInstallment,
+          Interest = interest,
+          InstallmentDate = DateTime.Now.AddMonths(i)
         };
         response.Installments.Add(installment);
       }

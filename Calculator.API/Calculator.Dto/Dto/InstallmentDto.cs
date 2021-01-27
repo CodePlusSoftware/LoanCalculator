@@ -5,12 +5,15 @@
 // // <date>27-01-2021</date>
 // // <summary>InstallmentDto.cs</summary>
 
+using System;
+
 namespace Calculator.Dto.Dto
 {
   public class InstallmentDto
   {
-    public decimal Capital { get; set; }
+    public decimal Principal { get; set; }
     public decimal Interest { get; set; }
-    public decimal Installment => this.Capital + this.Interest;
+    public DateTime InstallmentDate { get; set; }
+    public decimal Payment => this.Principal + this.Interest;
   }
 }

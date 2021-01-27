@@ -18,36 +18,36 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Calculator.Tests.Controllers
 {
-  public class LoanCalculatorControllerTests: BaseCalculatorTests
+  public class CreditCalculatorControllerTests: BaseCalculatorTests
   {
-    private readonly Mock<ILoanCalculatorService> loanCalculatorServiceMock;
-    private readonly LoanCalculatorController controller;
-    public LoanCalculatorControllerTests()
+    private readonly Mock<ICreditCalculatorService> loanCalculatorServiceMock;
+    private readonly CreditCalculatorController controller;
+    public CreditCalculatorControllerTests()
     {
-      this.loanCalculatorServiceMock = new Mock<ILoanCalculatorService>();
-      this.controller = new LoanCalculatorController(this.loanCalculatorServiceMock.Object);
+      this.loanCalculatorServiceMock = new Mock<ICreditCalculatorService>();
+      this.controller = new CreditCalculatorController(this.loanCalculatorServiceMock.Object);
     }
 
     [Fact]
     public async Task Calculate_ShouldCallCalculatorService()
     {
       //Arrange
-      var request = Fixture.Create<LoanCalculationRequest>();
+      var request = Fixture.Create<CalculateCreditRequest>();
       
       //Act
       _ = await controller.Calculate(request);
 
       //Assert
-      loanCalculatorServiceMock.Verify(x => x.Calculate(request), Times.Once);
+      loanCalculatorServiceMock.Verify(x => x.CalculateAsync(request), Times.Once);
     }
     
     [Fact]
     public async Task Calculate_ShouldReturnCalculatedResult()
     {
       //Arrange
-      var request = Fixture.Create<LoanCalculationRequest>();
-      var expectedResponse = Fixture.Create<LoanCalculationResponse>();
-      loanCalculatorServiceMock.Setup(x => x.Calculate(request)).ReturnsAsync(expectedResponse);
+      var request = Fixture.Create<CalculateCreditRequest>();
+      var expectedResponse = Fixture.Create<CreditCalculationResult>();
+      loanCalculatorServiceMock.Setup(x => x.CalculateAsync(request)).ReturnsAsync(expectedResponse);
       
       //Act
       var response = await controller.Calculate(request);

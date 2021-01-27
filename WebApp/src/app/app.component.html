@@ -1,12 +1,6 @@
-<div class="p-field p-col-12 p-md-3">
-  <label>Amount</label>
-  <p-inputNumber [(ngModel)]="val" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="5"
-                 decrementButtonClass="p-button-danger" [min]="0" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR">
-  </p-inputNumber>
+<div class="p-p-3">
+  <app-house-loan-calculator></app-house-loan-calculator>
+  <p-toast></p-toast>
 </div>
-<div class="p-field p-col-12 p-md-3">
-  <label>Period</label>
-  <p-inputNumber [(ngModel)]="val" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="5"
-                 decrementButtonClass="p-button-danger" [min]="0" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="decimal">
-  </p-inputNumber>
-</div>
+
+

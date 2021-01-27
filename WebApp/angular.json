@@ -34,7 +34,8 @@
               "src/styles.scss",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeflex/primeflex.css"
             ],
             "scripts": []
           },
@@ -73,6 +74,13 @@
           "options": {
             "browserTarget": "WebApp:build"
           },
+          "styles": [
+            "src/styles.scss",
+            "./node_modules/primeicons/primeicons.css",
+            "./node_modules/primeng/resources/themes/saga-blue/theme.css",
+            "./node_modules/primeng/resources/primeng.min.css",
+            "./node_modules/primeflex/primeflex.css"
+          ],
           "configurations": {
             "production": {
               "browserTarget": "WebApp:build:production"
@@ -98,9 +106,10 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/saga-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "./node_modules/primeicons/primeicons.css",
+              "./node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeflex/primeflex.css"
             ],
             "scripts": []
           }
