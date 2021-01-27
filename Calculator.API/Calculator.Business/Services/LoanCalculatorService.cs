@@ -6,6 +6,7 @@
 // // <summary>LoanCalculatorService.cs</summary>
 
 using System.Threading.Tasks;
+using Calculator.Dto.Dto;
 using Calculator.Dto.Request;
 using Calculator.Dto.Response;
 using FluentValidation;
@@ -25,12 +26,32 @@ namespace Calculator.Business.Services
     }
     public async Task<LoanCalculationResponse> Calculate(LoanCalculationRequest request)
     {
-      this.logger.Debug("Calculating the payback plan for params: {@Params}", request);
+        this.logger.Debug("Calculating the payback plan for params: {@Params}", request);
       await this.loanCalculationValidator.ValidateAndThrowAsync(request);
-      return new LoanCalculationResponse
+
+      const decimal interestRate = 3.5m;
+
+      var months = request.Period * 12;
+
+      var response = new LoanCalculationResponse();
+      var capitalInstallment = request.Amount / months;
+
+      var totalAmount = request.Amount;
+      var fixedAmount = request.Amount;
+      
+      //https://enerad.pl/finanse/kredyt-hipoteczny/jak-obliczyc-raty-i-odsetki-od-kredytu-hipotecznego/
+      for (int i = 0; i < months; i++)
       {
-        
-      };
+        var interest = (((totalAmount - i * capitalInstallment)/100 * interestRate)) / 12;
+        var installment = new InstallmentDto
+        {
+          Capital = capitalInstallment,
+          Interest = interest
+        };
+        response.Installments.Add(installment);
+      }
+
+      return response;
     }
   }
 }

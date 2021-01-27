@@ -5,12 +5,22 @@
 // // <date>26-01-2021</date>
 // // <summary>LoanCalculationResponse.cs</summary>
 
-using Calculator.Dto.Enum;
+
+using System.Collections.Generic;
+using Calculator.Dto.Dto;
 
 namespace Calculator.Dto.Response
 {
   public class LoanCalculationResponse
   {
-    public decimal Amount { get; set; }
+    public LoanCalculationResponse()
+    {
+      this.Installments = new List<InstallmentDto>();
+    }
+
+    public decimal TotalCapital => this.TotalInterest + this.TotalInstallment;
+    public decimal TotalInterest { get; set; }
+    public decimal TotalInstallment { get; set; }
+    public List<InstallmentDto> Installments { get; }
   }
 }
