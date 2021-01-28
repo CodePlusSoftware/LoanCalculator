@@ -1,11 +1,4 @@
-﻿// // <copyright file="LoanCalculatorControllerTests.cs" company="CodePlus Software">
-// // Copyright(c) 2021 All Right Reserved
-// // </copyright>
-// // <author>Szymon Hełmecki</author>
-// // <date>26-01-2021</date>
-// // <summary>LoanCalculatorControllerTests.cs</summary>
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Calculator.API.Controllers;
 using Calculator.Business.Services;
 using Calculator.Dto.Request;
@@ -18,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Calculator.Tests.Controllers
 {
-  public class LoanCalculatorControllerTests: BaseCalculatorTests
+  public class LoanCalculatorControllerTests: BaseTestClass
   {
     private readonly Mock<ILoanCalculatorManager> loanCalculatorServiceMock;
     private readonly CreditCalculatorController controller;
