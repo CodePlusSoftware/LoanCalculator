@@ -7,7 +7,7 @@
          styleClass="p-datatable-striped p-datatable-gridlines"
          [showCurrentPageReport]="true"
          [responsive]="true"
-         selectionMode="single"
+         [selectionMode]="!isLoading? 'single':  null"
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} installments"
 >
   <ng-template pTemplate="header" let-columns>

@@ -5,12 +5,15 @@
 // // <date>27-01-2021</date>
 // // <summary>Installment.cs</summary>
 
+using System;
+
 namespace Calculator.Business.Models
 {
   public class Installment
   {
-    public decimal Capital { get; set; }
+    public decimal Principal { get; set; }
     public decimal Interest { get; set; }
-    public decimal Total => this.Capital + this.Interest;
+    public DateTime InstallmentDate { get; set; }
+    public decimal Payment => this.Principal + this.Interest;
   }
 }

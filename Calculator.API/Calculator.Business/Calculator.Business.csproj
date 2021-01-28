@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Calculator.Core\Calculator.Core.csproj" />
       <ProjectReference Include="..\Calculator.Dto\Calculator.Dto.csproj" />
     </ItemGroup>
 

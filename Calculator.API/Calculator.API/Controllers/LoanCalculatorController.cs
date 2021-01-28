@@ -17,20 +17,20 @@ namespace Calculator.API.Controllers
   [Route("loan/calculator")]
   public class CreditCalculatorController: ControllerBase
   {
-    private readonly ILoanCalculatorService loanCalculatorService;
+    private readonly ILoanCalculatorManager loanCalculatorManager;
 
-    public CreditCalculatorController(ILoanCalculatorService loanCalculatorService)
+    public CreditCalculatorController(ILoanCalculatorManager loanCalculatorManager)
     {
-      this.loanCalculatorService = loanCalculatorService;
+      this.loanCalculatorManager = loanCalculatorManager;
     }
 
     [HttpGet]
     [ProducesResponseType(typeof(LoanCalculationResult), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Calculate(CalculateCreditRequest request)
+    public async Task<IActionResult> Calculate(CalculateLoanRequest request)
     {
-      var result = await this.loanCalculatorService.CalculateAsync(request);
+      var result = await this.loanCalculatorManager.CalculateAsync(request);
       return Ok(result);
     }
   }

@@ -18,13 +18,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Calculator.Tests.Controllers
 {
-  public class CreditCalculatorControllerTests: BaseCalculatorTests
+  public class LoanCalculatorControllerTests: BaseCalculatorTests
   {
-    private readonly Mock<ILoanCalculatorService> loanCalculatorServiceMock;
+    private readonly Mock<ILoanCalculatorManager> loanCalculatorServiceMock;
     private readonly CreditCalculatorController controller;
-    public CreditCalculatorControllerTests()
+    public LoanCalculatorControllerTests()
     {
-      this.loanCalculatorServiceMock = new Mock<ILoanCalculatorService>();
+      this.loanCalculatorServiceMock = new Mock<ILoanCalculatorManager>();
       this.controller = new CreditCalculatorController(this.loanCalculatorServiceMock.Object);
     }
 
@@ -32,7 +32,7 @@ namespace Calculator.Tests.Controllers
     public async Task Calculate_ShouldCallCalculatorService()
     {
       //Arrange
-      var request = Fixture.Create<CalculateCreditRequest>();
+      var request = Fixture.Create<CalculateLoanRequest>();
       
       //Act
       _ = await controller.Calculate(request);
@@ -45,7 +45,7 @@ namespace Calculator.Tests.Controllers
     public async Task Calculate_ShouldReturnCalculatedResult()
     {
       //Arrange
-      var request = Fixture.Create<CalculateCreditRequest>();
+      var request = Fixture.Create<CalculateLoanRequest>();
       var expectedResponse = Fixture.Create<LoanCalculationResult>();
       loanCalculatorServiceMock.Setup(x => x.CalculateAsync(request)).ReturnsAsync(expectedResponse);
       

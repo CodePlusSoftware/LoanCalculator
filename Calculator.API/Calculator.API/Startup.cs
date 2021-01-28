@@ -30,6 +30,7 @@ namespace Calculator.API
         .UseSwaggerDocs()
         .UseCors("Test")
         .UseExceptionHandler(err => err.UseCustomErrors(env))
+        .SeedData()
         .UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
   }

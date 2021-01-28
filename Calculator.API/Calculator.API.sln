@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Business", "Calc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Dto", "Calculator.Dto\Calculator.Dto.csproj", "{12AC3021-3230-4B77-9E46-D39042E887C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Core", "Calculator.Core\Calculator.Core.csproj", "{3821AA43-9CB8-442A-AB19-4503E3107F7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{12AC3021-3230-4B77-9E46-D39042E887C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12AC3021-3230-4B77-9E46-D39042E887C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12AC3021-3230-4B77-9E46-D39042E887C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3821AA43-9CB8-442A-AB19-4503E3107F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3821AA43-9CB8-442A-AB19-4503E3107F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3821AA43-9CB8-442A-AB19-4503E3107F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3821AA43-9CB8-442A-AB19-4503E3107F7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

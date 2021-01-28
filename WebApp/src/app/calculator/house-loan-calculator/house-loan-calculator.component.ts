@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CalculatorService} from "../services/calculator.service";
 import {CalculateCreditFormModel} from "../models/calculate-credit-form-model";
-import {ECreditType, EPeriodType, LoanCalculationResult} from "../../core/api_clients/calculator_api";
+import {ELoanType, EPaybackPlan, EPeriodType, LoanCalculationResult} from "../../core/api_clients/calculator_api";
 import {BaseComponentDirectives} from "../../core/directives/base-component-directives";
 import {filter, takeUntil} from "rxjs/operators";
 import {MessageService} from "primeng/api";
@@ -30,7 +30,7 @@ export class HouseLoanCalculatorComponent extends BaseComponentDirectives implem
       return;
     }
     this.isLoading = true;
-    this.calculatorService.calculateCredit(calculateModelForm.loanAmount, calculateModelForm.period, ECreditType.House, EPeriodType.Year)
+    this.calculatorService.calculateCredit(calculateModelForm.loanAmount, calculateModelForm.period, ELoanType.House, EPeriodType.Year, EPaybackPlan.ConstPrincipalAmount)
       .pipe(takeUntil(this.destroy$),
         filter(res => !!res))
       .subscribe(res => {

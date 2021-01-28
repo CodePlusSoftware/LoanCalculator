@@ -7,7 +7,7 @@
 
 namespace Calculator.Dto.Enum
 {
-  public enum ECreditType
+  public enum ELoanType
   {
     House = 1
   }

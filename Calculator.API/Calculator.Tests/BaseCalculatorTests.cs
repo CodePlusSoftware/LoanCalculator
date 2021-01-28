@@ -1,10 +1,4 @@
-﻿// // <copyright file="BaseCalculatorTests.cs" company="CodePlus Software">
-// // Copyright(c) 2021 All Right Reserved
-// // </copyright>
-// // <author>Szymon Hełmecki</author>
-// // <date>26-01-2021</date>
-// // <summary>BaseCalculatorTests.cs</summary>
-using AutoFixture;
+﻿using AutoFixture;
 
 namespace Calculator.Tests
 {

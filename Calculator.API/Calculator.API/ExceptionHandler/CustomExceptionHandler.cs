@@ -9,6 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Calculator.Business.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -62,28 +63,40 @@ namespace Calculator.API.ExceptionHandler
 
     private static ProblemDetails GetProblemDetails(Exception exception, bool includeDetails)
     {
-      var title = includeDetails ? "An error occured: " + exception.Message : "An error occured";
-      var details = includeDetails ? exception.ToString() : null;
-      var problemDetails = new ProblemDetails
-      {
-        Title = title,
-        Detail = details
-      };
-
+      bool includeMessage = false;
+      int status = StatusCodes.Status500InternalServerError;
+      
       switch (exception)
       {
         case ValidationException _:
+        case UndefinedPlanException _:
         {
-          problemDetails.Status = StatusCodes.Status400BadRequest;
+          includeMessage = true;
+          status = StatusCodes.Status400BadRequest;
+          break;
+        }
+        case ItemNotFoundException _ :
+        {
+          status = StatusCodes.Status404NotFound;
           break;
         }
         default:
         {
-          problemDetails.Status = StatusCodes.Status500InternalServerError;
+          status = StatusCodes.Status500InternalServerError;
           break;
         }
       }
 
+      var title = includeMessage ? $"An error occured {exception.Message}" : "An error occured";
+      var details = includeDetails ? exception.ToString() : null;
+      
+      var problemDetails = new ProblemDetails
+      {
+        Title = title,
+        Detail = details,
+        Status = status
+      };
+      
       return problemDetails;
     }
   }

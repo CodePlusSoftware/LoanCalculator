@@ -14,6 +14,6 @@ namespace Calculator.Dto.Dto
     public decimal Principal { get; set; }
     public decimal Interest { get; set; }
     public DateTime InstallmentDate { get; set; }
-    public decimal Payment => this.Principal + this.Interest;
+    public decimal Payment { get; set; }
   }
 }

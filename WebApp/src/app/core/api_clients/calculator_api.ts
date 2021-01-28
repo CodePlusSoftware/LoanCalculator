@@ -30,9 +30,10 @@ export class CalculatorApiClient {
      * @param period (optional) 
      * @param type (optional) 
      * @param periodType (optional) 
+     * @param paybackPlan (optional) 
      * @return Success
      */
-    loanCalculator(value: number | undefined, period: number | undefined, type: ECreditType | undefined, periodType: EPeriodType | undefined): Observable<LoanCalculationResult> {
+    loanCalculator(value: number | undefined, period: number | undefined, type: ELoanType | undefined, periodType: EPeriodType | undefined, paybackPlan: EPaybackPlan | undefined): Observable<LoanCalculationResult> {
         let url_ = this.baseUrl + "/loan/calculator?";
         if (value === null)
             throw new Error("The parameter 'value' cannot be null.");
@@ -50,6 +51,10 @@ export class CalculatorApiClient {
             throw new Error("The parameter 'periodType' cannot be null.");
         else if (periodType !== undefined)
             url_ += "PeriodType=" + encodeURIComponent("" + periodType) + "&";
+        if (paybackPlan === null)
+            throw new Error("The parameter 'paybackPlan' cannot be null.");
+        else if (paybackPlan !== undefined)
+            url_ += "PaybackPlan=" + encodeURIComponent("" + paybackPlan) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -105,7 +110,7 @@ export class CalculatorApiClient {
     }
 }
 
-export enum ECreditType {
+export enum ELoanType {
     House = "House",
 }
 
@@ -113,11 +118,15 @@ export enum EPeriodType {
     Year = "Year",
 }
 
+export enum EPaybackPlan {
+    ConstPrincipalAmount = "ConstPrincipalAmount",
+}
+
 export class InstallmentDto implements IInstallmentDto {
     principal?: number;
     interest?: number;
     installmentDate?: Date;
-    readonly payment?: number;
+    payment?: number;
 
     constructor(data?: IInstallmentDto) {
         if (data) {
@@ -133,7 +142,7 @@ export class InstallmentDto implements IInstallmentDto {
             this.principal = _data["principal"];
             this.interest = _data["interest"];
             this.installmentDate = _data["installmentDate"] ? new Date(_data["installmentDate"].toString()) : <any>undefined;
-            (<any>this).payment = _data["payment"];
+            this.payment = _data["payment"];
         }
     }
 
@@ -165,7 +174,7 @@ export class LoanCalculationResult implements ILoanCalculationResult {
     totalPrincipal?: number;
     totalInterest?: number;
     totalPayment?: number;
-    readonly installments?: InstallmentDto[] | undefined;
+    installments?: InstallmentDto[] | undefined;
 
     constructor(data?: ILoanCalculationResult) {
         if (data) {
@@ -182,9 +191,9 @@ export class LoanCalculationResult implements ILoanCalculationResult {
             this.totalInterest = _data["totalInterest"];
             this.totalPayment = _data["totalPayment"];
             if (Array.isArray(_data["installments"])) {
-                (<any>this).installments = [] as any;
+                this.installments = [] as any;
                 for (let item of _data["installments"])
-                    (<any>this).installments.push(InstallmentDto.fromJS(item));
+                    this.installments.push(InstallmentDto.fromJS(item));
             }
         }
     }
