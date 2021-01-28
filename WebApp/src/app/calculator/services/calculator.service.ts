@@ -1,7 +1,8 @@
 import {
   CalculatorApiClient,
   ECreditType,
-  EPeriodType, LoanCalculationResult
+  EPeriodType,
+  LoanCalculationResult
 } from "../../core/api_clients/calculator_api";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";

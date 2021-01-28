@@ -1,9 +1,20 @@
 <p-card header="Calculation results">
-  <ngx-charts-advanced-pie-chart
-    [view]="view"
-    [scheme]="colorScheme"
-    [results]="values"
-    [gradient]="gradient"
-  >
-  </ngx-charts-advanced-pie-chart>
+  <div class="p-grid">
+    <ngx-charts-advanced-pie-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="values"
+    >
+    </ngx-charts-advanced-pie-chart>
+    <div class="p-col-6">
+      <h3> Estimated payoff Date </h3>
+      <div>
+        {{estimatedPayoffDate | date : 'MMM dd, yyyy'}}
+      </div>
+      <h3> Estimated Installments</h3>
+      <div>
+        {{estimatedPayments}}
+      </div>
+    </div>
+  </div>
 </p-card>

@@ -16,7 +16,8 @@ export class HouseLoanCalculatorFormComponent implements OnInit {
   @Output()
   public onCalculate: EventEmitter<CalculateCreditFormModel> = new EventEmitter<CalculateCreditFormModel>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

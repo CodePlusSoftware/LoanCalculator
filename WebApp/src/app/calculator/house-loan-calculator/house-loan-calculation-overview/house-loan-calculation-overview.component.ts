@@ -8,21 +8,22 @@ import {LoanCalculationResult} from "../../../core/api_clients/calculator_api";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HouseLoanCalculationOverviewComponent implements OnInit, OnChanges {
+  public values: any[];
+  public view: [number, number] = [500, 200];
+
+  public showLegend: boolean = true;
+  public showLabels: boolean = true;
+  public isDoughnut: boolean = false;
+
+  public colorScheme = {
+    domain: ['#5AA454', '#A10A28']
+  };
+
+  public estimatedPayoffDate: Date;
+  public estimatedPayments: number;
 
   @Input()
   public calculationResult: LoanCalculationResult;
-
-  values: any[];
-  view: [number, number] = [500, 200];
-
-  gradient: boolean = true;
-  showLegend: boolean = true;
-  showLabels: boolean = true;
-  isDoughnut: boolean = false;
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28']
-  };
 
   constructor() {
   }
@@ -33,6 +34,7 @@ export class HouseLoanCalculationOverviewComponent implements OnInit, OnChanges 
 
   ngOnChanges(changes: SimpleChanges): void {
     this.updateGraph();
+    this.updateLoanDetails();
   }
 
   private updateGraph() {
@@ -46,5 +48,10 @@ export class HouseLoanCalculationOverviewComponent implements OnInit, OnChanges 
         "value": this.calculationResult.totalInterest
       }
     ];
+  }
+
+  private updateLoanDetails() {
+    this.estimatedPayoffDate = this.calculationResult.installments[this.calculationResult.installments.length - 1].installmentDate;
+    this.estimatedPayments = this.calculationResult.installments.length;
   }
 }
