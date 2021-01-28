@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CalculateCreditFormModel} from "../../models/calculate-credit-form-model";
 
 @Component({
   selector: 'app-house-credit-calculator-form',
   templateUrl: './house-loan-calculator-form.component.html',
-  styleUrls: ['./house-loan-calculator-form.component.scss']
+  styleUrls: ['./house-loan-calculator-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HouseLoanCalculatorFormComponent implements OnInit {
   public val: number = 200000;

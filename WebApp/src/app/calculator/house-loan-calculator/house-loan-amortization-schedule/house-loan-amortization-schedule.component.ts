@@ -1,10 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {InstallmentDto} from "../../../core/api_clients/calculator_api";
 
 @Component({
   selector: 'app-loan-calculation-results-list',
   templateUrl: './house-loan-amortization-schedule.component.html',
-  styleUrls: ['./house-loan-amortization-schedule.component.scss']
+  styleUrls: ['./house-loan-amortization-schedule.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HouseLoanAmortizationScheduleComponent implements OnInit {
 
