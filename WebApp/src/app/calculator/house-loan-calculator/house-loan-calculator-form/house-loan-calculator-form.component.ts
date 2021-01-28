@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CalculateCreditFormModel} from "../../models/calculate-credit-form-model";
 
 @Component({
@@ -9,6 +9,9 @@ import {CalculateCreditFormModel} from "../../models/calculate-credit-form-model
 export class HouseLoanCalculatorFormComponent implements OnInit {
   public val: number = 200000;
   public period: number = 25;
+
+  @Input()
+  public isLoading: boolean;
 
   @Output()
   public onCalculate: EventEmitter<CalculateCreditFormModel> = new EventEmitter<CalculateCreditFormModel>();

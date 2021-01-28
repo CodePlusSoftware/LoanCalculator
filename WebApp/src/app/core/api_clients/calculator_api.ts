@@ -26,14 +26,14 @@ export class CalculatorApiClient {
     }
 
     /**
-     * @param value (optional)
-     * @param period (optional)
-     * @param type (optional)
-     * @param periodType (optional)
+     * @param value (optional) 
+     * @param period (optional) 
+     * @param type (optional) 
+     * @param periodType (optional) 
      * @return Success
      */
-    creditCalculator(value: number | undefined, period: number | undefined, type: ECreditType | undefined, periodType: EPeriodType | undefined): Observable<CreditCalculationResult> {
-        let url_ = this.baseUrl + "/credit/calculator?";
+    loanCalculator(value: number | undefined, period: number | undefined, type: ECreditType | undefined, periodType: EPeriodType | undefined): Observable<LoanCalculationResult> {
+        let url_ = this.baseUrl + "/loan/calculator?";
         if (value === null)
             throw new Error("The parameter 'value' cannot be null.");
         else if (value !== undefined)
@@ -61,20 +61,20 @@ export class CalculatorApiClient {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCreditCalculator(response_);
+            return this.processLoanCalculator(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processCreditCalculator(<any>response_);
+                    return this.processLoanCalculator(<any>response_);
                 } catch (e) {
-                    return <Observable<CreditCalculationResult>><any>_observableThrow(e);
+                    return <Observable<LoanCalculationResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<CreditCalculationResult>><any>_observableThrow(response_);
+                return <Observable<LoanCalculationResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processCreditCalculator(response: HttpResponseBase): Observable<CreditCalculationResult> {
+    protected processLoanCalculator(response: HttpResponseBase): Observable<LoanCalculationResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -85,7 +85,7 @@ export class CalculatorApiClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = CreditCalculationResult.fromJS(resultData200);
+            result200 = LoanCalculationResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 500) {
@@ -101,7 +101,7 @@ export class CalculatorApiClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<CreditCalculationResult>(<any>null);
+        return _observableOf<LoanCalculationResult>(<any>null);
     }
 }
 
@@ -150,7 +150,7 @@ export class InstallmentDto implements IInstallmentDto {
         data["interest"] = this.interest;
         data["installmentDate"] = this.installmentDate ? this.installmentDate.toISOString() : <any>undefined;
         data["payment"] = this.payment;
-        return data;
+        return data; 
     }
 }
 
@@ -161,13 +161,13 @@ export interface IInstallmentDto {
     payment?: number;
 }
 
-export class CreditCalculationResult implements ICreditCalculationResult {
+export class LoanCalculationResult implements ILoanCalculationResult {
     totalPrincipal?: number;
     totalInterest?: number;
     totalPayment?: number;
     readonly installments?: InstallmentDto[] | undefined;
 
-    constructor(data?: ICreditCalculationResult) {
+    constructor(data?: ILoanCalculationResult) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -189,9 +189,9 @@ export class CreditCalculationResult implements ICreditCalculationResult {
         }
     }
 
-    static fromJS(data: any): CreditCalculationResult {
+    static fromJS(data: any): LoanCalculationResult {
         data = typeof data === 'object' ? data : {};
-        let result = new CreditCalculationResult();
+        let result = new LoanCalculationResult();
         result.init(data);
         return result;
     }
@@ -206,11 +206,11 @@ export class CreditCalculationResult implements ICreditCalculationResult {
             for (let item of this.installments)
                 data["installments"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 }
 
-export interface ICreditCalculationResult {
+export interface ILoanCalculationResult {
     totalPrincipal?: number;
     totalInterest?: number;
     totalPayment?: number;

@@ -20,11 +20,11 @@ namespace Calculator.Tests.Controllers
 {
   public class CreditCalculatorControllerTests: BaseCalculatorTests
   {
-    private readonly Mock<ICreditCalculatorService> loanCalculatorServiceMock;
+    private readonly Mock<ILoanCalculatorService> loanCalculatorServiceMock;
     private readonly CreditCalculatorController controller;
     public CreditCalculatorControllerTests()
     {
-      this.loanCalculatorServiceMock = new Mock<ICreditCalculatorService>();
+      this.loanCalculatorServiceMock = new Mock<ILoanCalculatorService>();
       this.controller = new CreditCalculatorController(this.loanCalculatorServiceMock.Object);
     }
 
@@ -46,7 +46,7 @@ namespace Calculator.Tests.Controllers
     {
       //Arrange
       var request = Fixture.Create<CalculateCreditRequest>();
-      var expectedResponse = Fixture.Create<CreditCalculationResult>();
+      var expectedResponse = Fixture.Create<LoanCalculationResult>();
       loanCalculatorServiceMock.Setup(x => x.CalculateAsync(request)).ReturnsAsync(expectedResponse);
       
       //Act

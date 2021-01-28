@@ -11,9 +11,9 @@ using Calculator.Dto.Dto;
 
 namespace Calculator.Dto.Response
 {
-  public class CreditCalculationResult
+  public class LoanCalculationResult
   {
-    public CreditCalculationResult()
+    public LoanCalculationResult()
     {
       this.Installments = new List<InstallmentDto>();
     }

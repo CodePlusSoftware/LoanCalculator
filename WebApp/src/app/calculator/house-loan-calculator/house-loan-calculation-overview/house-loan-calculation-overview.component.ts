@@ -1,7 +1,8 @@
 import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {LoanCalculationResult} from "../../../core/api_clients/calculator_api";
 
 @Component({
-  selector: 'app-house-loan-calculation-overview',
+  selector: 'app-loan-calculation-overview',
   templateUrl: './house-loan-calculation-overview.component.html',
   styleUrls: ['./house-loan-calculation-overview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -9,10 +10,7 @@ import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChan
 export class HouseLoanCalculationOverviewComponent implements OnInit, OnChanges {
 
   @Input()
-  public totalInterest: number;
-
-  @Input()
-  public totalPrincipal: number;
+  public calculationResult: LoanCalculationResult;
 
   values: any[];
   view: [number, number] = [500, 200];
@@ -41,11 +39,11 @@ export class HouseLoanCalculationOverviewComponent implements OnInit, OnChanges 
     this.values = [
       {
         "name": "Principal",
-        "value": this.totalPrincipal
+        "value": this.calculationResult.totalPrincipal
       },
       {
         "name": "Interest",
-        "value": this.totalInterest
+        "value": this.calculationResult.totalInterest
       }
     ];
   }

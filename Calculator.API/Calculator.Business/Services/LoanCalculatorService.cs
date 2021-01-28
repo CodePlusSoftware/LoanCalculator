@@ -16,17 +16,17 @@ using Serilog;
 
 namespace Calculator.Business.Services
 {
-  public class CreditCalculatorService : ICreditCalculatorService
+  public class LoanCalculatorService : ILoanCalculatorService
   {
     private readonly IValidator<CalculateCreditRequest> loanCalculationValidator;
     private readonly ILogger logger;
 
-    public CreditCalculatorService(IValidator<CalculateCreditRequest> loanCalculationValidator, ILogger logger)
+    public LoanCalculatorService(IValidator<CalculateCreditRequest> loanCalculationValidator, ILogger logger)
     {
       this.loanCalculationValidator = loanCalculationValidator;
       this.logger = logger;
     }
-    public async Task<CreditCalculationResult> CalculateAsync(CalculateCreditRequest request)
+    public async Task<LoanCalculationResult> CalculateAsync(CalculateCreditRequest request)
     {
       this.logger.Debug("Calculating the payback plan for params: {@Params}", request);
       await this.loanCalculationValidator.ValidateAndThrowAsync(request);
@@ -35,7 +35,7 @@ namespace Calculator.Business.Services
 
       var months = request.Period * 12;
 
-      var response = new CreditCalculationResult();
+      var response = new LoanCalculationResult();
       var capitalInstallment = request.Value / months;
 
       var totalAmount = request.Value;

@@ -11,8 +11,8 @@
   },
   "codeGenerators": {
     "openApiToTypeScriptClient": {
-      "className": "{controller}Service",
-      "moduleName": "CalculatorApiClient",
+      "className": "CalculatorApiClient",
+      "moduleName": "",
       "namespace": "",
       "typeScriptVersion": 2.4,
       "template": "Angular",

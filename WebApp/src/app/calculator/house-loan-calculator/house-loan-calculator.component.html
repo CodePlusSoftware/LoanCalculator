@@ -1,15 +1,16 @@
 <div class="p-pb-3">
-  <app-house-credit-calculator-form (onCalculate)="calculateCredit($event)"></app-house-credit-calculator-form>
+  <app-house-credit-calculator-form [isLoading]="isLoading"
+                                    (onCalculate)="calculateCredit($event)"></app-house-credit-calculator-form>
 </div>
 
-<div *ngIf="creditCalculationResult">
+<div *ngIf="loanCalculationResult">
   <div class="p-pb-3">
-    <app-house-loan-calculation-overview [totalInterest]="creditCalculationResult.totalInterest"
-                                         [totalPrincipal]="creditCalculationResult.totalPrincipal"></app-house-loan-calculation-overview>
+    <app-loan-calculation-overview [calculationResult]="loanCalculationResult"
+    ></app-loan-calculation-overview>
   </div>
 
   <div class="p-pb-3">
-    <app-house-credit-calculation-results-list class="p-py-3"
-                                               [installments]="creditCalculationResult.installments"></app-house-credit-calculation-results-list>
+    <app-loan-calculation-results-list class="p-py-3" [isLoading]="isLoading"
+                                       [installments]="loanCalculationResult.installments"></app-loan-calculation-results-list>
   </div>
 </div>

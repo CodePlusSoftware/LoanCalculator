@@ -10,11 +10,11 @@
     <div class="p-mx-3 p-col-12 p-md-6 p-xl-3">
       <label class="p-col-12">Loan term in years</label>
       <p-inputNumber [(ngModel)]="period" [showButtons]="true" class="p-col-12 p-md-8" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="5"
-                     decrementButtonClass="p-button-secondary" [min]="1" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="decimal">
+                     decrementButtonClass="p-button-secondary" [min]="1" [max]="100" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="decimal">
       </p-inputNumber>
     </div>
     <div class="p-mx-3 p-col-12 p-md-12 p-xl-3">
-      <button pButton label="Calculate" (click)="calculate()"></button>
+      <button pButton label="Calculate" (click)="calculate()" [disabled]="isLoading"></button>
     </div>
   </div>
 </p-card>

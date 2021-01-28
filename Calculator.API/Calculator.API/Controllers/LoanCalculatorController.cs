@@ -14,23 +14,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Calculator.API.Controllers
 {
-  [Route("credit/calculator")]
+  [Route("loan/calculator")]
   public class CreditCalculatorController: ControllerBase
   {
-    private readonly ICreditCalculatorService creditCalculatorService;
+    private readonly ILoanCalculatorService loanCalculatorService;
 
-    public CreditCalculatorController(ICreditCalculatorService creditCalculatorService)
+    public CreditCalculatorController(ILoanCalculatorService loanCalculatorService)
     {
-      this.creditCalculatorService = creditCalculatorService;
+      this.loanCalculatorService = loanCalculatorService;
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(CreditCalculationResult), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(LoanCalculationResult), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Calculate(CalculateCreditRequest request)
     {
-      var result = await this.creditCalculatorService.CalculateAsync(request);
+      var result = await this.loanCalculatorService.CalculateAsync(request);
       return Ok(result);
     }
   }

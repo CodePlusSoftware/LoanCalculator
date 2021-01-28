@@ -7,6 +7,7 @@ import {ButtonModule} from 'primeng/button';
 import {MessageService} from "primeng/api";
 import {TableModule} from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
+import {SkeletonModule} from 'primeng/skeleton';
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,8 @@ import {TooltipModule} from 'primeng/tooltip';
     ButtonModule,
     ToastModule,
     TableModule,
-    TooltipModule
+    TooltipModule,
+    SkeletonModule
   ],
   exports: [
     InputNumberModule,
@@ -24,7 +26,8 @@ import {TooltipModule} from 'primeng/tooltip';
     ButtonModule,
     ToastModule,
     TableModule,
-    TooltipModule
+    TooltipModule,
+    SkeletonModule
   ],
   providers: [MessageService]
 })
