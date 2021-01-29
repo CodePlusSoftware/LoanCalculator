@@ -29,7 +29,6 @@ namespace Calculator.Tests.Services
     {
       //Arrange
       var amount = Fixture.Create<decimal>();
-      ;
       var months = Fixture.Create<int>();
       var interestRate = Fixture.Create<float>();
       EPaybackPlan plan = 0;

@@ -56,11 +56,6 @@ namespace Calculator.API.Swagger
         {
           c.SwaggerEndpoint($"/{routePrefix}/{options.Name}/swagger.json", options.Title);
           c.RoutePrefix = routePrefix;
-          if (options.Enabled)
-          {
-            c.OAuthClientId("tutory-swagger");
-            c.OAuthAppName("Tutory API - Swagger");
-          }
         });
     }
   }
