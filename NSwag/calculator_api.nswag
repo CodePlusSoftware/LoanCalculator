@@ -67,7 +67,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "../WebApp/src/app/core/api_clients/calculator_api.ts",
+      "output": "",
       "newLineBehavior": "Auto"
     }
   }
