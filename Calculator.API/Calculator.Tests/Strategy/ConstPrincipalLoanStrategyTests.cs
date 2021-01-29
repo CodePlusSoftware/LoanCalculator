@@ -98,5 +98,20 @@ namespace Calculator.Tests.Strategy
       //Assert
       installments.Select(x => x.Interest.ToString("#.##")).Should().BeEquivalentTo(expectedInterests);
     }
+    
+    [Fact]
+    public async Task Generate_ShouldGenerateCorrectTotalPayment()
+    {
+      //Arrange
+      const decimal totalAmount = 1000.0m;
+      const int months = 12;
+      const float interestRatePercentage = 1.0f;
+
+      //Act
+      var installments = strategy.Generate(totalAmount, months, interestRatePercentage);
+
+      //Assert
+      installments.All(x => x.Payment == x.Interest + x.Principal).Should().BeTrue();
+    }
   }
 }

@@ -3,7 +3,9 @@ using Calculator.API;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Calculator.IntegrationTests
 {
@@ -11,19 +13,15 @@ namespace Calculator.IntegrationTests
   {
     protected override IHostBuilder CreateHostBuilder()
     {
-      var builder = Host.CreateDefaultBuilder()
-        .ConfigureWebHostDefaults(x =>
-        {
-          x.UseStartup<Startup>()
-            .UseTestServer();
-        });
-      return builder;
-    }
-
-    protected override IHost CreateHost(IHostBuilder builder)
-    {
-      builder.UseContentRoot(Directory.GetCurrentDirectory());
-      return base.CreateHost(builder);
+      var configuration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json")
+        .AddEnvironmentVariables()
+        .Build();
+      
+      return Host.CreateDefaultBuilder().ConfigureWebHostDefaults(builder =>
+        builder.UseStartup<Startup>().UseTestServer())
+        .UseSerilog((host, logger) => { logger.ReadFrom.Configuration(configuration); });
     }
   }
 }
