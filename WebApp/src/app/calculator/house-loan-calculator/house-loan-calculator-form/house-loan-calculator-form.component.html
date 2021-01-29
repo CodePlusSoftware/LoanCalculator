@@ -1,0 +1,29 @@
+<p-card header="House loan calculator"
+        subheader="This loan calculator will help you determine the monthly payments on a loan. Simply enter the loan amount and term rate in the fields below and click calculate.">
+  <div class="p-grid p-justify-center p-align-end">
+    <div class="p-mx-3 p-col-12 p-md-6 p-xl-3">
+      <label class="p-col-12">Loan amount: </label>
+      <p-inputNumber [(ngModel)]="val" [min]="1000" [max]="10000000000" [showButtons]="true" [step]="10000"
+                     buttonLayout="horizontal" class="p-col-12 p-md-8" currency="EUR"
+                     decrementButtonClass="p-button-secondary"
+                     decrementButtonIcon="pi pi-minus" incrementButtonClass="p-button-success"
+                     incrementButtonIcon="pi pi-plus" inputId="value" mode="currency" spinnerMode="horizontal">
+      </p-inputNumber>
+    </div>
+    <div class="p-mx-3 p-col-12 p-md-6 p-xl-3">
+      <label class="p-col-12">Loan term</label>
+      <p-inputNumber [(ngModel)]="period" [max]="100" [min]="1" [showButtons]="true"
+                     [step]="5" buttonLayout="horizontal" class="p-col-12 p-md-8"
+                     decrementButtonClass="p-button-secondary"
+                     decrementButtonIcon="pi pi-minus" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                     inputId="period" mode="decimal"
+                     spinnerMode="horizontal" suffix=" years">
+      </p-inputNumber>
+    </div>
+    <div class="p-mx-3 p-col-12 p-md-12 p-xl-3">
+      <button (click)="calculate()" [disabled]="isLoading" label="Calculate" pButton></button>
+    </div>
+  </div>
+</p-card>
+
+

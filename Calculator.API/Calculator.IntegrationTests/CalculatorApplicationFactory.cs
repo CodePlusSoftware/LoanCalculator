@@ -1,16 +1,27 @@
-﻿// // <copyright file="WebApplicationFactory.cs" company="CodePlus Software">
-// // Copyright(c) 2021 All Right Reserved
-// // </copyright>
-// // <author>Szymon Hełmecki</author>
-// // <date>26-01-2021</date>
-// // <summary>WebApplicationFactory.cs</summary>
-
+﻿using System.IO;
 using Calculator.API;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Calculator.IntegrationTests
 {
-  public class CalculatorApplicationFactory: WebApplicationFactory<Startup>
+  public class CalculatorApplicationFactory : WebApplicationFactory<Startup>
   {
+    protected override IHostBuilder CreateHostBuilder()
+    {
+      var configuration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json")
+        .AddEnvironmentVariables()
+        .Build();
+      
+      return Host.CreateDefaultBuilder().ConfigureWebHostDefaults(builder =>
+        builder.UseStartup<Startup>().UseTestServer())
+        .UseSerilog((host, logger) => { logger.ReadFrom.Configuration(configuration); });
+    }
   }
 }
