@@ -1,4 +1,4 @@
-export class CalculateCreditFormModel {
+export class CalculateLoanFormModel {
   loanAmount: number;
   period: number;
 

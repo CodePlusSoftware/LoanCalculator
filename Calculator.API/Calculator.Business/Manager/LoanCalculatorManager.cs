@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Calculator.Business.Services;
 using Calculator.Dto.Dto;
+using Calculator.Dto.Enum;
 using Calculator.Dto.Request;
 using Calculator.Dto.Response;
 using FluentValidation;
@@ -13,17 +14,17 @@ namespace Calculator.Business.Manager
   {
     private readonly IValidator<CalculateLoanRequest> loanCalculationValidator;
     private readonly ILogger logger;
-    private readonly ILoanTypeService loanTypeService;
+    private readonly ILoanService loanService;
     private readonly IInstallmentService installmentService;
 
     public LoanCalculatorManager(IValidator<CalculateLoanRequest> loanCalculationValidator, 
       ILogger logger, 
-      ILoanTypeService loanTypeService,
+      ILoanService loanService,
       IInstallmentService installmentService)
     {
       this.loanCalculationValidator = loanCalculationValidator;
       this.logger = logger;
-      this.loanTypeService = loanTypeService;
+      this.loanService = loanService;
       this.installmentService = installmentService;
     }
     public async Task<LoanCalculationResult> CalculateAsync(CalculateLoanRequest request)
@@ -31,8 +32,10 @@ namespace Calculator.Business.Manager
       this.logger.Debug("Calculating the payback plan for params: {@Params}", request);
       await this.loanCalculationValidator.ValidateAndThrowAsync(request);
 
-      var loanType = await this.loanTypeService.GetLoanTypeOrFailAsync(request.Type);
-      var installments = await this.installmentService.GetInstallmentPlanAsync(request.Value, request.Period, request.PeriodType, loanType.InterestRate, request.PaybackPlan);
+      var loanType = await this.loanService.GetLoanTypeOrFailAsync(request.Type);
+      
+      var months = request.PeriodType == EPeriodType.Year ? request.Period * 12 : request.Period;
+      var installments = await this.installmentService.GetInstallmentPlanAsync(request.Value, months, loanType.InterestRate, request.PaybackPlan);
 
       var response = new LoanCalculationResult
       {

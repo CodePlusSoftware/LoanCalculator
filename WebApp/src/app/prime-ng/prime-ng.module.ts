@@ -31,4 +31,5 @@ import {SkeletonModule} from 'primeng/skeleton';
   ],
   providers: [MessageService]
 })
-export class PrimeNgModule { }
+export class PrimeNgModule {
+}

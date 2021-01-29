@@ -21,4 +21,5 @@ import {PrimeNgModule} from "./prime-ng/prime-ng.module";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

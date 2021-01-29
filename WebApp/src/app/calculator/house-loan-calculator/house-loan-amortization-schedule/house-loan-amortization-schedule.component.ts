@@ -18,7 +18,8 @@ export class HouseLoanAmortizationScheduleComponent implements OnInit {
   @Input()
   public isLoading: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.initTable();
@@ -26,10 +27,10 @@ export class HouseLoanAmortizationScheduleComponent implements OnInit {
 
   private initTable() {
     this.columns = [
-      { field: 'installmentDate', header: 'Payment date' },
-      { field: 'principal', header: 'Principal' },
-      { field: 'interest', header: 'Interest' },
-      { field: 'payment', header: 'Payment' }
+      {field: 'installmentDate', header: 'Payment date'},
+      {field: 'principal', header: 'Principal'},
+      {field: 'interest', header: 'Interest'},
+      {field: 'payment', header: 'Payment'}
     ];
   }
 }

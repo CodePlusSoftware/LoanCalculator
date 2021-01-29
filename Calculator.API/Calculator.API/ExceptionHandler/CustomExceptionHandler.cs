@@ -75,6 +75,12 @@ namespace Calculator.API.ExceptionHandler
           status = StatusCodes.Status400BadRequest;
           break;
         }
+        case InvalidPeriodException _:
+        {
+          status = StatusCodes.Status422UnprocessableEntity;
+          includeDetails = true;
+          break;
+        }
         case ItemNotFoundException _ :
         {
           status = StatusCodes.Status404NotFound;

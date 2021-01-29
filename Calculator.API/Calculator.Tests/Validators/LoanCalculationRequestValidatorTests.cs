@@ -13,6 +13,9 @@ namespace Calculator.Tests.Validators
     [InlineData(null)]
     [InlineData(-1)]
     [InlineData(0)]
+    [InlineData(50)]
+    [InlineData(999)]
+    [InlineData(10000000001)]
     public void ValidateAndThrowAsync_ShouldHaveValidationError_WhenLoanAmountIsInvalid(decimal amount)
     {
       var command = Fixture.Build<CalculateLoanRequest>()
@@ -23,9 +26,11 @@ namespace Calculator.Tests.Validators
     }
     
     [Theory]
-    [InlineData(1)]
+    [InlineData(1000)]
     [InlineData(10000)]
     [InlineData(1000000)]
+    [InlineData(10000000000)]
+    
     public void ValidateAndThrowAsync_ShouldNotHaveValidationError_WhenLoanAmountIsValid(decimal amount)
     {
       var command = Fixture.Build<CalculateLoanRequest>()

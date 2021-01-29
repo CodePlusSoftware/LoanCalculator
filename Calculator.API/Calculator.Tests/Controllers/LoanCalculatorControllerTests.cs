@@ -5,6 +5,7 @@ using Calculator.Dto.Request;
 using Moq;
 using Xunit;
 using AutoFixture;
+using Calculator.Business.Manager;
 using Calculator.Dto.Response;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
 <div class="p-pb-3">
-  <app-house-credit-calculator-form [isLoading]="isLoading"
-                                    (onCalculate)="calculateCredit($event)"></app-house-credit-calculator-form>
+  <app-house-credit-calculator-form (onCalculate)="calculateCredit($event)"
+                                    [isLoading]="isLoading"></app-house-credit-calculator-form>
 </div>
 
 <div *ngIf="loanCalculationResult">
@@ -10,7 +10,7 @@
   </div>
 
   <div class="p-pb-3">
-    <app-loan-calculation-results-list class="p-py-3" [isLoading]="isLoading"
-                                       [installments]="loanCalculationResult.installments"></app-loan-calculation-results-list>
+    <app-loan-calculation-results-list [installments]="loanCalculationResult.installments" [isLoading]="isLoading"
+                                       class="p-py-3"></app-loan-calculation-results-list>
   </div>
 </div>

@@ -27,7 +27,7 @@ namespace Calculator.API.Bootstrap
     
     public static IServiceCollection RegisterServices(this IServiceCollection serviceCollection)
     {
-      serviceCollection.AddScoped<ILoanTypeService, LoanTypeService>();
+      serviceCollection.AddScoped<ILoanService, LoanService>();
       serviceCollection.AddScoped<IInstallmentService, InstallmentService>();
       return serviceCollection;
     }
@@ -42,7 +42,7 @@ namespace Calculator.API.Bootstrap
     
     public static IServiceCollection RegisterDataBase(this IServiceCollection serviceCollection)
     {
-      serviceCollection.AddDbContext<CalculatorDbContext>(
+      serviceCollection.AddDbContext<LoanDbContext>(
         opt =>
         {
           opt.UseInMemoryDatabase(databaseName: "TEST");

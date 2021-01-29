@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Calculator.Core.Entity
 {
   [Table("LoanTypes")]
-  public class LoanType
+  public class LoanTypeEntity
   {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }

@@ -3,24 +3,25 @@
   <div class="p-grid p-justify-center p-align-end">
     <div class="p-mx-3 p-col-12 p-md-6 p-xl-3">
       <label class="p-col-12">Loan amount: </label>
-      <p-inputNumber [(ngModel)]="val" [showButtons]="true" class="p-col-12 p-md-8" buttonLayout="horizontal"
-                     inputId="value" spinnerMode="horizontal" [step]="10000"
-                     decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-success"
-                     incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR">
+      <p-inputNumber [(ngModel)]="val" [min]="1000" [max]="10000000000" [showButtons]="true" [step]="10000"
+                     buttonLayout="horizontal" class="p-col-12 p-md-8" currency="EUR"
+                     decrementButtonClass="p-button-secondary"
+                     decrementButtonIcon="pi pi-minus" incrementButtonClass="p-button-success"
+                     incrementButtonIcon="pi pi-plus" inputId="value" mode="currency" spinnerMode="horizontal">
       </p-inputNumber>
     </div>
     <div class="p-mx-3 p-col-12 p-md-6 p-xl-3">
       <label class="p-col-12">Loan term</label>
-      <p-inputNumber [(ngModel)]="period" [showButtons]="true" class="p-col-12 p-md-8" buttonLayout="horizontal"
-                     inputId="period" spinnerMode="horizontal" [step]="5"
-                     suffix=" years"
-                     decrementButtonClass="p-button-secondary" [min]="1" [max]="100"
-                     incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
-                     decrementButtonIcon="pi pi-minus" mode="decimal">
+      <p-inputNumber [(ngModel)]="period" [max]="100" [min]="1" [showButtons]="true"
+                     [step]="5" buttonLayout="horizontal" class="p-col-12 p-md-8"
+                     decrementButtonClass="p-button-secondary"
+                     decrementButtonIcon="pi pi-minus" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                     inputId="period" mode="decimal"
+                     spinnerMode="horizontal" suffix=" years">
       </p-inputNumber>
     </div>
     <div class="p-mx-3 p-col-12 p-md-12 p-xl-3">
-      <button pButton label="Calculate" (click)="calculate()" [disabled]="isLoading"></button>
+      <button (click)="calculate()" [disabled]="isLoading" label="Calculate" pButton></button>
     </div>
   </div>
 </p-card>

@@ -10,20 +10,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Calculator.Core
 {
-  public class CalculatorDbContext : DbContext
+  public class LoanDbContext : DbContext
   {
-    public CalculatorDbContext(DbContextOptions<CalculatorDbContext> options)
+    public LoanDbContext(DbContextOptions<LoanDbContext> options)
       : base(options)
     {
     }
 
-    public DbSet<LoanType> LoanType { get; set; }
+    public DbSet<LoanTypeEntity> LoanType { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.Entity<LoanType>().Property(x => x.Name).IsRequired().HasMaxLength(64);
-      modelBuilder.Entity<LoanType>().Property(x => x.Description).IsRequired().HasMaxLength(255);
-      modelBuilder.Entity<LoanType>().Property(x => x.InterestRate).IsRequired();
+      modelBuilder.Entity<LoanTypeEntity>().Property(x => x.Name).IsRequired().HasMaxLength(64);
+      modelBuilder.Entity<LoanTypeEntity>().Property(x => x.Description).IsRequired().HasMaxLength(255);
+      modelBuilder.Entity<LoanTypeEntity>().Property(x => x.InterestRate).IsRequired();
 
       base.OnModelCreating(modelBuilder);
     }

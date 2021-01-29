@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HouseLoanAmortizationScheduleComponent } from './house-loan-amortization-schedule.component';
+import {HouseLoanAmortizationScheduleComponent} from './house-loan-amortization-schedule.component';
 
 describe('HouseCreditCalculationResultsListComponent', () => {
   let component: HouseLoanAmortizationScheduleComponent;
@@ -8,9 +8,9 @@ describe('HouseCreditCalculationResultsListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HouseLoanAmortizationScheduleComponent ]
+      declarations: [HouseLoanAmortizationScheduleComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

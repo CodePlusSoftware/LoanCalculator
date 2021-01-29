@@ -7,19 +7,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Calculator.Business.Services
 {
-  public class LoanTypeService : ILoanTypeService
+  public class LoanService : ILoanService
   {
-    private readonly CalculatorDbContext dbContext;
+    private readonly LoanDbContext loanDbContext;
 
-    public LoanTypeService(CalculatorDbContext dbContext)
+    public LoanService(LoanDbContext loanDbContext)
     {
-      this.dbContext = dbContext;
+      this.loanDbContext = loanDbContext;
     }
 
-    public async Task<LoanType> GetLoanTypeOrFailAsync(ELoanType type)
+    public async Task<LoanTypeEntity> GetLoanTypeOrFailAsync(ELoanType type)
     {
       var loanTypeName = type.ToString();
-      var loanType = await this.dbContext.LoanType.FirstOrDefaultAsync(x => x.Name == loanTypeName);
+      var loanType = await this.loanDbContext.LoanType.FirstOrDefaultAsync(x => x.Name == loanTypeName);
 
       if (loanType is null)
       {

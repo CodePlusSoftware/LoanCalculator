@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CalculateCreditFormModel} from "../../models/calculate-credit-form-model";
+import {CalculateLoanFormModel} from "../../models/calculate-loan-form-model";
 
 @Component({
   selector: 'app-house-credit-calculator-form',
@@ -15,7 +15,7 @@ export class HouseLoanCalculatorFormComponent implements OnInit {
   public isLoading: boolean;
 
   @Output()
-  public onCalculate: EventEmitter<CalculateCreditFormModel> = new EventEmitter<CalculateCreditFormModel>();
+  public onCalculate: EventEmitter<CalculateLoanFormModel> = new EventEmitter<CalculateLoanFormModel>();
 
   constructor() {
   }
@@ -24,6 +24,6 @@ export class HouseLoanCalculatorFormComponent implements OnInit {
   }
 
   calculate() {
-    this.onCalculate.emit(new CalculateCreditFormModel(this.val, this.period));
+    this.onCalculate.emit(new CalculateLoanFormModel(this.val, this.period));
   }
 }

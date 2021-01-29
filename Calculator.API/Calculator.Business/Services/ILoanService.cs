@@ -4,8 +4,8 @@ using Calculator.Dto.Enum;
 
 namespace Calculator.Business.Services
 {
-  public interface ILoanTypeService
+  public interface ILoanService
   {
-    Task<LoanType> GetLoanTypeOrFailAsync(ELoanType type);
+    Task<LoanTypeEntity> GetLoanTypeOrFailAsync(ELoanType type);
   }
 }

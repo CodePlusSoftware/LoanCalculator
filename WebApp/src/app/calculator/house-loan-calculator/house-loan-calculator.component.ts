@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CalculatorService} from "../services/calculator.service";
-import {CalculateCreditFormModel} from "../models/calculate-credit-form-model";
+import {CalculateLoanFormModel} from "../models/calculate-loan-form-model";
 import {ELoanType, EPaybackPlan, EPeriodType, LoanCalculationResult} from "../../core/api_clients/calculator_api";
 import {BaseComponentDirectives} from "../../core/directives/base-component-directives";
 import {filter, takeUntil} from "rxjs/operators";
@@ -16,7 +16,7 @@ export class HouseLoanCalculatorComponent extends BaseComponentDirectives implem
   public loanCalculationResult: LoanCalculationResult;
   public isLoading: boolean;
 
-  private lastCalculatedModel: CalculateCreditFormModel
+  private lastCalculatedModel: CalculateLoanFormModel
 
   constructor(private calculatorService: CalculatorService, private messageService: MessageService) {
     super();
@@ -25,7 +25,7 @@ export class HouseLoanCalculatorComponent extends BaseComponentDirectives implem
   ngOnInit(): void {
   }
 
-  calculateCredit(calculateModelForm: CalculateCreditFormModel) {
+  calculateCredit(calculateModelForm: CalculateLoanFormModel) {
     if (this.lastCalculatedModel?.loanAmount === calculateModelForm.loanAmount && this.lastCalculatedModel?.period === calculateModelForm.period) {
       return;
     }

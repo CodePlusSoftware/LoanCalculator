@@ -1,16 +1,16 @@
 <div class="section-title">Amortization Schedule</div>
-<p-table [value]="installments"
-         [rows]="rowsPerPageOptions[0]"
-         [columns]="columns"
-         [rowsPerPageOptions]="rowsPerPageOptions"
+<p-table [columns]="columns"
          [paginator]="true"
-         styleClass="p-datatable-striped p-datatable-gridlines"
-         [showCurrentPageReport]="true"
          [responsive]="true"
+         [rowsPerPageOptions]="rowsPerPageOptions"
+         [rows]="rowsPerPageOptions[0]"
          [selectionMode]="!isLoading? 'single':  null"
+         [showCurrentPageReport]="true"
+         [value]="installments"
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} installments"
+         styleClass="p-datatable-striped p-datatable-gridlines"
 >
-  <ng-template pTemplate="header" let-columns>
+  <ng-template let-columns pTemplate="header">
     <tr>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">{{col.header}}
         <p-sortIcon [field]="col.field"></p-sortIcon>
@@ -18,7 +18,7 @@
     </tr>
   </ng-template>
 
-  <ng-template pTemplate="body" let-installment>
+  <ng-template let-installment pTemplate="body">
     <tr *ngIf="!isLoading">
       <td>{{installment.installmentDate | date: 'MMM yyyy'}}</td>
       <td>{{installment.principal | currency : 'EUR'}}</td>

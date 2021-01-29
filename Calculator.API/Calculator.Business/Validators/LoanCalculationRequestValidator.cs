@@ -7,7 +7,7 @@ namespace Calculator.Business.Validators
   {
     public LoanCalculationRequestValidator()
     {
-      RuleFor(x => x.Value).GreaterThanOrEqualTo(1);
+      RuleFor(x => x.Value).GreaterThanOrEqualTo(1000).LessThanOrEqualTo(10000000000);
       RuleFor(x => x.Period).GreaterThanOrEqualTo(1).LessThanOrEqualTo(100);
       RuleFor(x => x.Type).IsInEnum().WithMessage("Invalid loan type");
       RuleFor(x => x.PeriodType).IsInEnum().WithMessage("Invalid period type");

@@ -1,6 +1,7 @@
 import {
   CalculatorApiClient,
-  ELoanType, EPaybackPlan,
+  ELoanType,
+  EPaybackPlan,
   EPeriodType,
   LoanCalculationResult
 } from "../../core/api_clients/calculator_api";

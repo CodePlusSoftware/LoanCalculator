@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using Calculator.Business.Exceptions;
 using Calculator.Business.Models;
 
 namespace Calculator.Business.Services.Strategy
 {
   public class ConstPrincipalLoanStrategy : IConstPrincipalLoanStrategy
   {
-    public IList<Installment> Generate(decimal amount, int months, float interestRatePercentage)
+    public IList<Installment> Generate(decimal totalAmount, int months, float interestRatePercentage)
+    {
+      if (months <= 0)
+      {
+        throw new InvalidPeriodException();
+      }
+
+      var principalAmount = totalAmount / months;
+      var interestRateVal = (decimal) interestRatePercentage / 100;
+
+      var installments = GenerateInstallments(totalAmount, months, principalAmount, interestRateVal);
+      return installments;
+    }
+
+    private static IList<Installment> GenerateInstallments(decimal totalAmount, int months, decimal principalAmount,
+      decimal interestRateVal)
     {
       var installments = new List<Installment>();
-      var principalAmount = amount / months;
-      var interestRateVal = (decimal) interestRatePercentage / 100;
-      
-      var totalAmount = amount;
       for (var installmentNo = 0; installmentNo < months; installmentNo++)
       {
         var interest = (totalAmount - installmentNo * principalAmount) * interestRateVal / 12;

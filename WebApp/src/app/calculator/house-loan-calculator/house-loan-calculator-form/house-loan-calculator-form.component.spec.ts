@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HouseLoanCalculatorFormComponent } from './house-loan-calculator-form.component';
+import {HouseLoanCalculatorFormComponent} from './house-loan-calculator-form.component';
 
 describe('HouseLoanCalculatorFormComponent', () => {
   let component: HouseLoanCalculatorFormComponent;
@@ -8,9 +8,9 @@ describe('HouseLoanCalculatorFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HouseLoanCalculatorFormComponent ]
+      declarations: [HouseLoanCalculatorFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

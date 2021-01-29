@@ -16,11 +16,9 @@ namespace Calculator.Business.Services
       this.constPrincipalLoanStrategy = constPrincipalLoanStrategy;
     }
 
-    public Task<IList<Installment>> GetInstallmentPlanAsync(decimal amount, int period, EPeriodType periodType,
+    public Task<IList<Installment>> GetInstallmentPlanAsync(decimal amount, int months,
       float interestRate, EPaybackPlan paybackPlan)
     {
-      var months = GetMonths(period, periodType); 
-      
       var installments = paybackPlan switch
       {
         EPaybackPlan.ConstPrincipalAmount => constPrincipalLoanStrategy.Generate(amount, months, interestRate),
@@ -29,8 +27,5 @@ namespace Calculator.Business.Services
 
       return Task.FromResult(installments);
     }
-
-    private static int GetMonths(int period, EPeriodType periodType)
-     => periodType == EPeriodType.Year ? period * 12 : period;
   }
 }

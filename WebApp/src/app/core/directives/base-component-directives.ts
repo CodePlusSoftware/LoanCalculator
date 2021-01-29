@@ -1,5 +1,5 @@
 import {Subject} from "rxjs";
-import {Component, Directive, OnDestroy} from "@angular/core";
+import {Directive, OnDestroy} from "@angular/core";
 
 @Directive()
 export abstract class BaseComponentDirectives implements OnDestroy {
