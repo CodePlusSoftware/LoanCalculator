@@ -6,8 +6,8 @@ namespace Calculator.Dto.Request
   {
     public decimal Value { get; set; }
     public int Period { get; set; }
-    public ELoanType Type { get; set; } 
-    public EPeriodType PeriodType { get; set; } 
-    public EPaybackPlan PaybackPlan { get; set; } 
+    public ELoanType Type { get; set; }
+    public EPeriodType PeriodType { get; set; }
+    public EPaybackPlan PaybackPlan { get; set; }
   }
 }

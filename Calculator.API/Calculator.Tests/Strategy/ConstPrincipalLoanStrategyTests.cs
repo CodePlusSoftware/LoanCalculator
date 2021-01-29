@@ -10,30 +10,30 @@ using Xunit;
 
 namespace Calculator.Tests.Strategy
 {
-  public class ConstPrincipalLoanStrategyTests: BaseTestClass
+  public class ConstPrincipalLoanStrategyTests : BaseTestClass
   {
     private readonly IConstPrincipalLoanStrategy strategy;
 
     public ConstPrincipalLoanStrategyTests()
     {
-      this.strategy = new ConstPrincipalLoanStrategy();
+      strategy = new ConstPrincipalLoanStrategy();
     }
-    
+
     [Fact]
     public async Task Generate_ShouldThrowItemNotFoundException_WhenLoanTypeNotFound()
     {
       //Arrange
       var totalAmount = 1.0m;
-      int months = 0;
-      float interestRatePercentage = 1.0f;
-      
+      var months = 0;
+      var interestRatePercentage = 1.0f;
+
       //Act
-      Func<IEnumerable<Installment>> act = () =>  this.strategy.Generate(totalAmount, months, interestRatePercentage);
+      Func<IEnumerable<Installment>> act = () => strategy.Generate(totalAmount, months, interestRatePercentage);
 
       //Assert
       act.Should().Throw<InvalidPeriodException>();
     }
-    
+
     [Fact]
     public async Task Generate_ShouldGenerateProperNumberOfInstallments()
     {
@@ -41,14 +41,14 @@ namespace Calculator.Tests.Strategy
       const decimal totalAmount = 1.0m;
       const int months = 12;
       const float interestRatePercentage = 1.0f;
-      
+
       //Act
-      var installments = this.strategy.Generate(totalAmount, months, interestRatePercentage);
+      var installments = strategy.Generate(totalAmount, months, interestRatePercentage);
 
       //Assert
       installments.Should().HaveCount(months);
     }
-    
+
     [Fact]
     public async Task Generate_ShouldGenerateConstPrincipalInstallmentAmount()
     {
@@ -57,14 +57,14 @@ namespace Calculator.Tests.Strategy
       const int months = 12;
       const float interestRatePercentage = 1.0f;
       var expectedPrincipalAmount = totalAmount / months;
-      
+
       //Act
-      var installments = this.strategy.Generate(totalAmount, months, interestRatePercentage);
+      var installments = strategy.Generate(totalAmount, months, interestRatePercentage);
 
       //Assert
       installments.Should().OnlyContain(x => x.Principal == expectedPrincipalAmount);
     }
-    
+
     [Fact]
     public async Task Generate_ShouldGenerateCorrectInstallmentDate()
     {
@@ -73,14 +73,14 @@ namespace Calculator.Tests.Strategy
       const int months = 12;
       const float interestRatePercentage = 1.0f;
       var expectedPaymentDates = Enumerable.Range(0, months).Select(x => DateTime.Now.AddMonths(x).Date);
-      
+
       //Act
-      var installments = this.strategy.Generate(totalAmount, months, interestRatePercentage);
+      var installments = strategy.Generate(totalAmount, months, interestRatePercentage);
 
       //Assert
       installments.Select(x => x.InstallmentDate.Date).Should().BeEquivalentTo(expectedPaymentDates);
     }
-    
+
     [Fact]
     public async Task Generate_ShouldGenerateCorrectInterests()
     {
@@ -89,13 +89,14 @@ namespace Calculator.Tests.Strategy
       const int months = 12;
       const float interestRatePercentage = 1.0f;
       var expectedInterests = Enumerable.Range(0, months)
-        .Select(x => ((totalAmount - x * totalAmount / months) * (decimal)(interestRatePercentage / 100) / 12).ToString ("#.##"));
-      
+        .Select(x =>
+          ((totalAmount - x * totalAmount / months) * (decimal) (interestRatePercentage / 100) / 12).ToString("#.##"));
+
       //Act
-      var installments = this.strategy.Generate(totalAmount, months, interestRatePercentage);
+      var installments = strategy.Generate(totalAmount, months, interestRatePercentage);
 
       //Assert
-      installments.Select(x => x.Interest.ToString ("#.##")).Should().BeEquivalentTo(expectedInterests);
+      installments.Select(x => x.Interest.ToString("#.##")).Should().BeEquivalentTo(expectedInterests);
     }
   }
 }

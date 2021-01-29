@@ -19,12 +19,9 @@ namespace Calculator.Business.Services
     public async Task<LoanTypeEntity> GetLoanTypeOrFailAsync(ELoanType type)
     {
       var loanTypeName = type.ToString();
-      var loanType = await this.loanDbContext.LoanType.FirstOrDefaultAsync(x => x.Name == loanTypeName);
+      var loanType = await loanDbContext.LoanType.FirstOrDefaultAsync(x => x.Name == loanTypeName);
 
-      if (loanType is null)
-      {
-        throw new ItemNotFoundException("Loan type not found");
-      }
+      if (loanType is null) throw new ItemNotFoundException("Loan type not found");
 
       return loanType;
     }

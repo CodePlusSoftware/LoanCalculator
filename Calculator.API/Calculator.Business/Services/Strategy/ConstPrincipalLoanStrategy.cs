@@ -9,10 +9,7 @@ namespace Calculator.Business.Services.Strategy
   {
     public IList<Installment> Generate(decimal totalAmount, int months, float interestRatePercentage)
     {
-      if (months <= 0)
-      {
-        throw new InvalidPeriodException();
-      }
+      if (months <= 0) throw new InvalidPeriodException();
 
       var principalAmount = totalAmount / months;
       var interestRateVal = (decimal) interestRatePercentage / 100;

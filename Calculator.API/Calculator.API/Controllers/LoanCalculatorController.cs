@@ -1,13 +1,5 @@
-﻿// // <copyright file="LoanCalculatorController.cs" company="CodePlus Software">
-// // Copyright(c) 2021 All Right Reserved
-// // </copyright>
-// // <author>Szymon Hełmecki</author>
-// // <date>26-01-2021</date>
-// // <summary>LoanCalculatorController.cs</summary>
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Calculator.Business.Manager;
-using Calculator.Business.Services;
 using Calculator.Dto.Request;
 using Calculator.Dto.Response;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Calculator.API.Controllers
 {
   [Route("loan/calculator")]
-  public class CreditCalculatorController: ControllerBase
+  public class CreditCalculatorController : ControllerBase
   {
     private readonly ILoanCalculatorManager loanCalculatorManager;
 
@@ -31,7 +23,7 @@ namespace Calculator.API.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Calculate(CalculateLoanRequest request)
     {
-      var result = await this.loanCalculatorManager.CalculateAsync(request);
+      var result = await loanCalculatorManager.CalculateAsync(request);
       return Ok(result);
     }
   }

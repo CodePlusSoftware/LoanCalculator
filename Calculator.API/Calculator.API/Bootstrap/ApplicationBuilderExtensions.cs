@@ -20,13 +20,13 @@ namespace Calculator.API.Bootstrap
     }
 
 
-  private static void Seed(this LoanDbContext context)
-  {
-    if (context.LoanType.Any()) return;
-    
-    context.LoanType.AddAsync(new LoanTypeEntity {Id = 1, Name = ELoanType.House.ToString(), Description = "House loan entity", InterestRate = 3.5f});
-    context.SaveChanges();
+    private static void Seed(this LoanDbContext context)
+    {
+      if (context.LoanType.Any()) return;
 
-  }
+      context.LoanType.AddAsync(new LoanTypeEntity
+        {Id = 1, Name = ELoanType.House.ToString(), Description = "House loan entity", InterestRate = 3.5f});
+      context.SaveChanges();
+    }
   }
 }

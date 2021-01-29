@@ -1,11 +1,4 @@
-﻿// // <copyright file="CalculatorDbContext.cs" company="CodePlus Software">
-// // Copyright(c) 2021 All Right Reserved
-// // </copyright>
-// // <author>Szymon Hełmecki</author>
-// // <date>28-01-2021</date>
-// // <summary>CalculatorDbContext.cs</summary>
-
-using Calculator.Core.Entity;
+﻿using Calculator.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Calculator.Core

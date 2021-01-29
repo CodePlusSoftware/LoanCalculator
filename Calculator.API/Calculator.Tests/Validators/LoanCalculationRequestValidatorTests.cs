@@ -1,13 +1,13 @@
-﻿using Calculator.Business.Validators;
-using Calculator.Dto.Request;
-using Xunit;
-using AutoFixture;
+﻿using AutoFixture;
+using Calculator.Business.Validators;
 using Calculator.Dto.Enum;
+using Calculator.Dto.Request;
 using FluentValidation.TestHelper;
+using Xunit;
 
 namespace Calculator.Tests.Validators
 {
-  public class LoanCalculationRequestValidatorTests: BaseValidatorTests<LoanCalculationRequestValidator>
+  public class LoanCalculationRequestValidatorTests : BaseValidatorTests<LoanCalculationRequestValidator>
   {
     [Theory]
     [InlineData(null)]
@@ -24,13 +24,12 @@ namespace Calculator.Tests.Validators
 
       Validator.ShouldHaveValidationErrorFor(x => x.Value, command);
     }
-    
+
     [Theory]
     [InlineData(1000)]
     [InlineData(10000)]
     [InlineData(1000000)]
     [InlineData(10000000000)]
-    
     public void ValidateAndThrowAsync_ShouldNotHaveValidationError_WhenLoanAmountIsValid(decimal amount)
     {
       var command = Fixture.Build<CalculateLoanRequest>()
@@ -39,7 +38,7 @@ namespace Calculator.Tests.Validators
 
       Validator.ShouldNotHaveValidationErrorFor(x => x.Value, command);
     }
-    
+
     [Theory]
     [InlineData(null)]
     [InlineData(-1)]
@@ -54,7 +53,7 @@ namespace Calculator.Tests.Validators
 
       Validator.ShouldHaveValidationErrorFor(x => x.Period, command);
     }
-    
+
     [Theory]
     [InlineData(1)]
     [InlineData(25)]
@@ -67,7 +66,7 @@ namespace Calculator.Tests.Validators
 
       Validator.ShouldNotHaveValidationErrorFor(x => x.Period, command);
     }
-    
+
     [Fact]
     public void ValidateAndThrowAsync_ShouldHaveValidationError_WhenLoanTypeInvalid()
     {
@@ -78,7 +77,7 @@ namespace Calculator.Tests.Validators
 
       Validator.ShouldHaveValidationErrorFor(x => x.Type, command);
     }
-    
+
     [Theory]
     [InlineData(ELoanType.House)]
     public void ValidateAndThrowAsync_ShouldNotHaveValidationError_WhenLoanTypeIsValid(ELoanType type)
@@ -89,7 +88,7 @@ namespace Calculator.Tests.Validators
 
       Validator.ShouldNotHaveValidationErrorFor(x => x.Type, command);
     }
-    
+
     [Fact]
     public void ValidateAndThrowAsync_ShouldHaveValidationError_WhenPeriodTypeInvalid()
     {
@@ -100,7 +99,7 @@ namespace Calculator.Tests.Validators
 
       Validator.ShouldHaveValidationErrorFor(x => x.PeriodType, command);
     }
-    
+
     [Theory]
     [InlineData(EPeriodType.Year)]
     public void ValidateAndThrowAsync_ShouldNotHaveValidationError_WhenPeriodTypeIsValid(EPeriodType type)
@@ -111,7 +110,7 @@ namespace Calculator.Tests.Validators
 
       Validator.ShouldNotHaveValidationErrorFor(x => x.PeriodType, command);
     }
-    
+
     [Fact]
     public void ValidateAndThrowAsync_ShouldHaveValidationError_WhenPaybackPlanInvalid()
     {
@@ -122,7 +121,7 @@ namespace Calculator.Tests.Validators
 
       Validator.ShouldHaveValidationErrorFor(x => x.PaybackPlan, command);
     }
-    
+
     [Theory]
     [InlineData(EPaybackPlan.ConstPrincipalAmount)]
     public void ValidateAndThrowAsync_ShouldNotHaveValidationError_WhenPaybackPlanIsValid(EPaybackPlan plan)

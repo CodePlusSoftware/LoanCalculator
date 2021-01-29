@@ -12,46 +12,48 @@ namespace Calculator.API.Bootstrap
   public static class DependencyInjection
   {
     public static IServiceCollection RegisterDependencies(this IServiceCollection serviceCollection)
-      => serviceCollection
+    {
+      return serviceCollection
         .RegisterManagers()
         .RegisterServices()
         .RegisterValidators()
         .RegisterLoanStrategy()
         .RegisterDataBase();
+    }
 
     public static IServiceCollection RegisterManagers(this IServiceCollection serviceCollection)
     {
       serviceCollection.AddScoped<ILoanCalculatorManager, LoanCalculatorManager>();
       return serviceCollection;
     }
-    
+
     public static IServiceCollection RegisterServices(this IServiceCollection serviceCollection)
     {
       serviceCollection.AddScoped<ILoanService, LoanService>();
       serviceCollection.AddScoped<IInstallmentService, InstallmentService>();
       return serviceCollection;
     }
-    
+
     public static IServiceCollection RegisterValidators(this IServiceCollection serviceCollection)
     {
       ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en");
       serviceCollection.AddValidatorsFromAssembly(typeof(LoanCalculatorManager).Assembly);
-      
+
       return serviceCollection;
     }
-    
+
     public static IServiceCollection RegisterDataBase(this IServiceCollection serviceCollection)
     {
       serviceCollection.AddDbContext<LoanDbContext>(
         opt =>
         {
-          opt.UseInMemoryDatabase(databaseName: "TEST");
+          opt.UseInMemoryDatabase("TEST");
           opt.EnableDetailedErrors();
         }, ServiceLifetime.Transient);
-      
+
       return serviceCollection;
     }
-    
+
     public static IServiceCollection RegisterLoanStrategy(this IServiceCollection serviceCollection)
     {
       serviceCollection.AddScoped<IConstPrincipalLoanStrategy, ConstPrincipalLoanStrategy>();

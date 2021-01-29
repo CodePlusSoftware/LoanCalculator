@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Calculator.Business.Validators
 {
-  public class LoanCalculationRequestValidator: AbstractValidator<CalculateLoanRequest>
+  public class LoanCalculationRequestValidator : AbstractValidator<CalculateLoanRequest>
   {
     public LoanCalculationRequestValidator()
     {

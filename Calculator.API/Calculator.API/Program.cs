@@ -10,7 +10,6 @@ namespace Calculator.API
 {
   public class Program
   {
-
     public static void Main(string[] args)
     {
       var configuration = new ConfigurationBuilder()
@@ -34,15 +33,16 @@ namespace Calculator.API
       }
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args, IConfiguration configuration) =>
-      Host.CreateDefaultBuilder(args)
+    public static IHostBuilder CreateHostBuilder(string[] args, IConfiguration configuration)
+    {
+      return Host.CreateDefaultBuilder(args)
         .ConfigureLogging(logging =>
         {
           logging.ClearProviders();
           logging.AddSerilog();
         })
         .UseSerilog((host, logger) => { logger.ReadFrom.Configuration(configuration); })
-        .ConfigureWebHostDefaults(webBuilder => {
-          webBuilder.UseStartup<Startup>(); });
+        .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+    }
   }
 }

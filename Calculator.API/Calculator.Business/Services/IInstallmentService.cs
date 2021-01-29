@@ -7,6 +7,7 @@ namespace Calculator.Business.Services
 {
   public interface IInstallmentService
   {
-    Task<IList<Installment>> GetInstallmentPlanAsync(decimal amount, int months, float interestRate, EPaybackPlan paybackPlan);
+    Task<IList<Installment>> GetInstallmentPlanAsync(decimal amount, int months, float interestRate,
+      EPaybackPlan paybackPlan);
   }
 }

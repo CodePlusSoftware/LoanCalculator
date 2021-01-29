@@ -1,11 +1,4 @@
-﻿// // <copyright file="InstallmentDto.cs" company="CodePlus Software">
-// // Copyright(c) 2021 All Right Reserved
-// // </copyright>
-// // <author>Szymon Hełmecki</author>
-// // <date>27-01-2021</date>
-// // <summary>InstallmentDto.cs</summary>
-
-using System;
+﻿using System;
 
 namespace Calculator.Dto.Dto
 {

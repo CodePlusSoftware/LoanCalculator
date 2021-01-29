@@ -1,14 +1,3 @@
-// <copyright file="Extensions.cs" company="Infoprojekt Sp. z o.o.">
-// Copyright(c) 2020 All Right Reserved
-// </copyright>
-// <author>shelmecki</author>
-// <date>16-01-2020 23:03</date>
-// <summary>Extensions.cs</summary>
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using Calculator.API.Bootstrap;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -41,10 +30,7 @@ namespace Calculator.API.Swagger
       if (!options.Enabled) return services;
 
       return services.AddSwaggerGen(
-        c =>
-        {
-          c.SwaggerDoc(options.Name, new OpenApiInfo {Title = options.Title, Version = options.Version});
-        });
+        c => { c.SwaggerDoc(options.Name, new OpenApiInfo {Title = options.Title, Version = options.Version}); });
     }
 
     /// <summary>

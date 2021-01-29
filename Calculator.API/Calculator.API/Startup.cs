@@ -16,7 +16,7 @@ namespace Calculator.API
     {
       services.AddControllers()
         .AddJsonOptions(opt => opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-      
+
       services
         .RegisterDependencies()
         .AddCors(opt => opt.AddPolicy("Test", cors => cors.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()))

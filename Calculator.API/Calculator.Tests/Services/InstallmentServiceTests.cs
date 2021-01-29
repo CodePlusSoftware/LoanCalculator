@@ -20,26 +20,27 @@ namespace Calculator.Tests.Services
 
     public InstallmentServiceTests()
     {
-      this.constPrincipalLoanStrategyMock = new Mock<IConstPrincipalLoanStrategy>();
-      this.service = new InstallmentService(this.constPrincipalLoanStrategyMock.Object);
+      constPrincipalLoanStrategyMock = new Mock<IConstPrincipalLoanStrategy>();
+      service = new InstallmentService(constPrincipalLoanStrategyMock.Object);
     }
 
     [Fact]
     public async Task Generate_ShouldThrowUndefinedPlanException_WhenPayBackPlanIsInvalid()
     {
       //Arrange
-      var amount = Fixture.Create<decimal>();;
+      var amount = Fixture.Create<decimal>();
+      ;
       var months = Fixture.Create<int>();
       var interestRate = Fixture.Create<float>();
       EPaybackPlan plan = 0;
-      
+
       //Act
-      Func<Task> act = () =>  service.GetInstallmentPlanAsync(amount, months, interestRate, plan);
+      Func<Task> act = () => service.GetInstallmentPlanAsync(amount, months, interestRate, plan);
 
       //Assert
       await act.Should().ThrowAsync<UndefinedPlanException>();
     }
-    
+
     [Fact]
     public async Task Generate_ShouldInvokeConstPrincipalLoanStrategy_WhenPayBackPlanIsConstPrincipalAmount()
     {
@@ -47,14 +48,14 @@ namespace Calculator.Tests.Services
       var amount = Fixture.Create<decimal>();
       var months = Fixture.Create<int>();
       var interestRate = Fixture.Create<float>();
-      EPaybackPlan plan = EPaybackPlan.ConstPrincipalAmount;
+      var plan = EPaybackPlan.ConstPrincipalAmount;
       var expectedInstallments = Fixture.CreateMany<Installment>(10).ToList();
 
       constPrincipalLoanStrategyMock.Setup(x => x.Generate(amount, months, interestRate))
         .Returns(expectedInstallments);
-      
+
       //Act
-     var installments = await  service.GetInstallmentPlanAsync(amount, months, interestRate, plan);
+      var installments = await service.GetInstallmentPlanAsync(amount, months, interestRate, plan);
 
       //Assert
       constPrincipalLoanStrategyMock.Verify(x => x.Generate(amount, months, interestRate), Times.Once);

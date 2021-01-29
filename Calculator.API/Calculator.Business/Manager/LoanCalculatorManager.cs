@@ -12,13 +12,13 @@ namespace Calculator.Business.Manager
 {
   public class LoanCalculatorManager : ILoanCalculatorManager
   {
-    private readonly IValidator<CalculateLoanRequest> loanCalculationValidator;
-    private readonly ILogger logger;
-    private readonly ILoanService loanService;
     private readonly IInstallmentService installmentService;
+    private readonly IValidator<CalculateLoanRequest> loanCalculationValidator;
+    private readonly ILoanService loanService;
+    private readonly ILogger logger;
 
-    public LoanCalculatorManager(IValidator<CalculateLoanRequest> loanCalculationValidator, 
-      ILogger logger, 
+    public LoanCalculatorManager(IValidator<CalculateLoanRequest> loanCalculationValidator,
+      ILogger logger,
       ILoanService loanService,
       IInstallmentService installmentService)
     {
@@ -27,15 +27,18 @@ namespace Calculator.Business.Manager
       this.loanService = loanService;
       this.installmentService = installmentService;
     }
+
     public async Task<LoanCalculationResult> CalculateAsync(CalculateLoanRequest request)
     {
-      this.logger.Debug("Calculating the payback plan for params: {@Params}", request);
-      await this.loanCalculationValidator.ValidateAndThrowAsync(request);
+      logger.Debug("Calculating the payback plan for params: {@Params}", request);
+      await loanCalculationValidator.ValidateAndThrowAsync(request);
 
-      var loanType = await this.loanService.GetLoanTypeOrFailAsync(request.Type);
-      
+      var loanType = await loanService.GetLoanTypeOrFailAsync(request.Type);
+
       var months = request.PeriodType == EPeriodType.Year ? request.Period * 12 : request.Period;
-      var installments = await this.installmentService.GetInstallmentPlanAsync(request.Value, months, loanType.InterestRate, request.PaybackPlan);
+      var installments =
+        await installmentService.GetInstallmentPlanAsync(request.Value, months, loanType.InterestRate,
+          request.PaybackPlan);
 
       var response = new LoanCalculationResult
       {

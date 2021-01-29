@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Calculator.IntegrationTests
 {
-  public class CalculatorApplicationFactory: WebApplicationFactory<Startup>
+  public class CalculatorApplicationFactory : WebApplicationFactory<Startup>
   {
     protected override IHostBuilder CreateHostBuilder()
     {
@@ -19,7 +19,7 @@ namespace Calculator.IntegrationTests
         });
       return builder;
     }
-    
+
     protected override IHost CreateHost(IHostBuilder builder)
     {
       builder.UseContentRoot(Directory.GetCurrentDirectory());
