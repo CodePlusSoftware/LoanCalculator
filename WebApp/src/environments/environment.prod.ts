@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  baseCalculatorApiUrl: 'https://localhost:5001',
 };
+
