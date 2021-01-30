@@ -1,3 +1,4 @@
-cd ../WebApp/dist/WebApp/
+cd ../WebApp/
 
-Invoke-Item index.html
+npm i
+ng serve
