@@ -1,16 +1,16 @@
 <div class="p-pb-3">
   <app-house-credit-calculator-form (onCalculate)="calculateCredit($event)"
-                                    [isLoading]="isLoading"></app-house-credit-calculator-form>
+                                    [isLoading]="isLoading | async"></app-house-credit-calculator-form>
 </div>
 
-<div *ngIf="loanCalculationResult">
+<div *ngIf="loanCalculationResult | async as result">
   <div class="p-pb-3">
-    <app-loan-calculation-overview [calculationResult]="loanCalculationResult"
+    <app-loan-calculation-overview [calculationResult]="result"
     ></app-loan-calculation-overview>
   </div>
 
-  <div class="p-pb-3">
-    <app-loan-calculation-results-list [installments]="loanCalculationResult.installments" [isLoading]="isLoading"
+  <div class="p-pb-3" *ngIf="loanCalculationResult | async as calculationResult">
+    <app-loan-calculation-results-list [installments]="calculationResult.installments" [isLoading]="isLoading | async"
                                        class="p-py-3"></app-loan-calculation-results-list>
   </div>
 </div>

@@ -10,6 +10,10 @@ import {HouseLoanCalculationOverviewComponent} from './house-loan-calculator/hou
 import {PrimeNgModule} from "../prime-ng/prime-ng.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {CalculatorState} from "./store/calculator.state";
+import {environment} from "../../environments/environment";
+import {NgxsModule} from "@ngxs/store";
+import {ToastState} from "./store/toast.state";
 
 
 @NgModule({
@@ -20,7 +24,10 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
     CoreModule,
     PrimeNgModule,
     BrowserAnimationsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NgxsModule.forRoot([CalculatorState, ToastState], {
+      developmentMode: !environment.production
+    })
   ],
   exports: [HouseLoanCalculatorComponent]
 })

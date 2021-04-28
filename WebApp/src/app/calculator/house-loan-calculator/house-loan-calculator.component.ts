@@ -5,6 +5,9 @@ import {ELoanType, EPaybackPlan, EPeriodType, LoanCalculationResult} from "../..
 import {BaseComponentDirectives} from "../../core/directives/base-component-directives";
 import {filter, takeUntil} from "rxjs/operators";
 import {MessageService} from "primeng/api";
+import {CalculatorState} from "../store/calculator.state";
+import {Observable} from "rxjs";
+import {Select} from "@ngxs/store";
 
 @Component({
   selector: 'app-house-loan-calculator',
@@ -13,8 +16,8 @@ import {MessageService} from "primeng/api";
 })
 export class HouseLoanCalculatorComponent extends BaseComponentDirectives implements OnInit {
 
-  public loanCalculationResult: LoanCalculationResult;
-  public isLoading: boolean;
+  @Select(CalculatorState.result) loanCalculationResult: Observable<LoanCalculationResult>;
+  @Select(CalculatorState.isLoading) isLoading: Observable<boolean>;
 
   private lastCalculatedModel: CalculateLoanFormModel
 
@@ -29,19 +32,11 @@ export class HouseLoanCalculatorComponent extends BaseComponentDirectives implem
     if (this.lastCalculatedModel?.loanAmount === calculateModelForm.loanAmount && this.lastCalculatedModel?.period === calculateModelForm.period) {
       return;
     }
-    this.isLoading = true;
     this.calculatorService.calculateCredit(calculateModelForm.loanAmount, calculateModelForm.period, ELoanType.House, EPeriodType.Year, EPaybackPlan.ConstPrincipalAmount)
       .pipe(takeUntil(this.destroy$),
         filter(res => !!res))
       .subscribe(res => {
-          this.loanCalculationResult = res;
           this.lastCalculatedModel = calculateModelForm;
-          this.isLoading = false
-        },
-        err => {
-          this.messageService.add({severity: 'error', summary: 'Calculation failed', detail: err}
-          );
-          this.isLoading = false;
         });
   }
 }
