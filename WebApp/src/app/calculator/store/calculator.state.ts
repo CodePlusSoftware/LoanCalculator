@@ -44,7 +44,9 @@ export class CalculatorState {
   @Action(Calculator.Calculate)
   feedAnimals(ctx: StateContext<CalculatorStateModel>, action: Calculator.Calculate) {
     const state = ctx.getState();
-    ctx.setState({
+    debugger;
+    if (action.amount == state.amount && action.period == state.period) return EMPTY;
+    ctx.patchState({
       ...state,
       isLoading: true,
       amount: action.amount,
